@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?><sbgn xmlns="http://sbgn.org/libsbgn/0.2">
+    <sbgn:map xmlns:sbgn="http://sbgn.org/libsbgn/0.2" language="activity flow">
+        <sbgn:bbox xmlns:sbgn="http://sbgn.org/libsbgn/0.2" x="0" y="0" w="1855" h="879"/>
+        <sbgn:glyph xmlns:sbgn="http://sbgn.org/libsbgn/0.2" id="glyph1" class="compartment" orientation="horizontal">
+            <sbgn:label xmlns:sbgn="http://sbgn.org/libsbgn/0.2" text=""/>
+            <sbgn:bbox xmlns:sbgn="http://sbgn.org/libsbgn/0.2" x="131" y="352" w="790" h="492"/>
+            <sbgn:glyph xmlns:sbgn="http://sbgn.org/libsbgn/0.2" id="glyph1a" class="unit of information" orientation="horizontal">
+                <sbgn:label xmlns:sbgn="http://sbgn.org/libsbgn/0.2" text="Infected Cell"/>
+                <sbgn:bbox xmlns:sbgn="http://sbgn.org/libsbgn/0.2" x="210" y="342" w="145" h="20"/>
+            </sbgn:glyph>
+        </sbgn:glyph>
+        <sbgn:glyph xmlns:sbgn="http://sbgn.org/libsbgn/0.2" id="glyph2" class="compartment" orientation="horizontal">
+            <sbgn:label xmlns:sbgn="http://sbgn.org/libsbgn/0.2" text=""/>
+            <sbgn:bbox xmlns:sbgn="http://sbgn.org/libsbgn/0.2" x="1122" y="32" w="253" h="437"/>
+            <sbgn:glyph xmlns:sbgn="http://sbgn.org/libsbgn/0.2" id="glyph2a" class="unit of information" orientation="horizontal">
+                <sbgn:label xmlns:sbgn="http://sbgn.org/libsbgn/0.2" text="nucleic acid feature:ADN"/>
+                <sbgn:bbox xmlns:sbgn="http://sbgn.org/libsbgn/0.2" x="1147" y="22" w="255" h="20"/>
+            </sbgn:glyph>
+        </sbgn:glyph>
+        <sbgn:glyph xmlns:sbgn="http://sbgn.org/libsbgn/0.2" id="glyph3" class="compartment" orientation="horizontal">
+            <sbgn:label xmlns:sbgn="http://sbgn.org/libsbgn/0.2" text=""/>
+            <sbgn:bbox xmlns:sbgn="http://sbgn.org/libsbgn/0.2" x="931" y="190" w="160" h="272"/>
+            <sbgn:glyph xmlns:sbgn="http://sbgn.org/libsbgn/0.2" id="glyph3a" class="unit of information" orientation="horizontal">
+                <sbgn:label xmlns:sbgn="http://sbgn.org/libsbgn/0.2" text="virus"/>
+                <sbgn:bbox xmlns:sbgn="http://sbgn.org/libsbgn/0.2" x="947" y="180" w="65" h="20"/>
+            </sbgn:glyph>
+        </sbgn:glyph>
+        <sbgn:glyph xmlns:sbgn="http://sbgn.org/libsbgn/0.2" id="glyph4" class="not" orientation="horizontal">
+            <sbgn:bbox xmlns:sbgn="http://sbgn.org/libsbgn/0.2" x="1403" y="355" w="119" h="119"/>
+            <sbgn:port xmlns:sbgn="http://sbgn.org/libsbgn/0.2" y="453" x="1417" id="glyph4.2"/>
+            <sbgn:port xmlns:sbgn="http://sbgn.org/libsbgn/0.2" y="348" x="1415" id="glyph4.1"/>
+        </sbgn:glyph>
+        <sbgn:glyph xmlns:sbgn="http://sbgn.org/libsbgn/0.2" id="glyph5" compartmentRef="glyph1" class="biological activity" orientation="horizontal">
+            <sbgn:label xmlns:sbgn="http://sbgn.org/libsbgn/0.2" text="ERK"/>
+            <sbgn:bbox xmlns:sbgn="http://sbgn.org/libsbgn/0.2" x="613" y="377" w="119" h="75"/>
+            <sbgn:glyph xmlns:sbgn="http://sbgn.org/libsbgn/0.2" id="glyph5a" class="unit of information" orientation="horizontal">
+                <sbgn:label xmlns:sbgn="http://sbgn.org/libsbgn/0.2" text="aa"/>
+                <sbgn:entity xmlns:sbgn="http://sbgn.org/libsbgn/0.2" name="complex"/>
+                <sbgn:bbox xmlns:sbgn="http://sbgn.org/libsbgn/0.2" x="625" y="369" w="35" h="16"/>
+            </sbgn:glyph>
+            <sbgn:port xmlns:sbgn="http://sbgn.org/libsbgn/0.2" y="446" x="706" id="glyph5.2"/>
+            <sbgn:port xmlns:sbgn="http://sbgn.org/libsbgn/0.2" y="458" x="623" id="glyph5.1"/>
+        </sbgn:glyph>
+        <sbgn:glyph xmlns:sbgn="http://sbgn.org/libsbgn/0.2" id="glyph6" compartmentRef="glyph1" class="perturbation" orientation="horizontal">
+            <sbgn:label xmlns:sbgn="http://sbgn.org/libsbgn/0.2" text="acide"/>
+            <sbgn:bbox xmlns:sbgn="http://sbgn.org/libsbgn/0.2" x="454" y="377" w="121" h="75"/>
+        </sbgn:glyph>
+        <sbgn:glyph xmlns:sbgn="http://sbgn.org/libsbgn/0.2" id="glyph7" class="or" orientation="horizontal">
+            <sbgn:bbox xmlns:sbgn="http://sbgn.org/libsbgn/0.2" x="42" y="565" w="94" h="94"/>
+            <sbgn:port xmlns:sbgn="http://sbgn.org/libsbgn/0.2" y="560" x="135" id="glyph7.2"/>
+            <sbgn:port xmlns:sbgn="http://sbgn.org/libsbgn/0.2" y="573" x="117" id="glyph7.1"/>
+            <sbgn:port xmlns:sbgn="http://sbgn.org/libsbgn/0.2" y="558" x="134" id="glyph7.3"/>
+        </sbgn:glyph>
+        <sbgn:glyph xmlns:sbgn="http://sbgn.org/libsbgn/0.2" id="glyph8" class="and" orientation="horizontal">
+            <sbgn:bbox xmlns:sbgn="http://sbgn.org/libsbgn/0.2" x="1163" y="550" w="124" h="124"/>
+            <sbgn:port xmlns:sbgn="http://sbgn.org/libsbgn/0.2" y="596" x="1144" id="glyph8.2"/>
+            <sbgn:port xmlns:sbgn="http://sbgn.org/libsbgn/0.2" y="558" x="1289" id="glyph8.1"/>
+            <sbgn:port xmlns:sbgn="http://sbgn.org/libsbgn/0.2" y="612" x="1163" id="glyph8.3"/>
+        </sbgn:glyph>
+        <sbgn:glyph xmlns:sbgn="http://sbgn.org/libsbgn/0.2" id="glyph9" compartmentRef="glyph1" class="biological activity" orientation="horizontal">
+            <sbgn:label xmlns:sbgn="http://sbgn.org/libsbgn/0.2" text="Beta BBB"/>
+            <sbgn:bbox xmlns:sbgn="http://sbgn.org/libsbgn/0.2" x="694" y="575" w="194" h="75"/>
+            <sbgn:glyph xmlns:sbgn="http://sbgn.org/libsbgn/0.2" id="glyph9a" class="unit of information" orientation="horizontal">
+                <sbgn:label xmlns:sbgn="http://sbgn.org/libsbgn/0.2" text="aaa"/>
+                <sbgn:entity xmlns:sbgn="http://sbgn.org/libsbgn/0.2" name="nucleic acid feature"/>
+                <sbgn:bbox xmlns:sbgn="http://sbgn.org/libsbgn/0.2" x="714" y="567" w="45" h="16"/>
+            </sbgn:glyph>
+            <sbgn:port xmlns:sbgn="http://sbgn.org/libsbgn/0.2" y="612" x="910" id="glyph9.2"/>
+            <sbgn:port xmlns:sbgn="http://sbgn.org/libsbgn/0.2" y="649" x="770" id="glyph9.1"/>
+        </sbgn:glyph>
+        <sbgn:glyph xmlns:sbgn="http://sbgn.org/libsbgn/0.2" id="glyph10" compartmentRef="glyph1" class="phenotype" orientation="horizontal">
+            <sbgn:label xmlns:sbgn="http://sbgn.org/libsbgn/0.2" text="apoptose"/>
+            <sbgn:bbox xmlns:sbgn="http://sbgn.org/libsbgn/0.2" x="597" y="750" w="176" h="75"/>
+            <sbgn:port xmlns:sbgn="http://sbgn.org/libsbgn/0.2" y="733" x="653" id="glyph10.2"/>
+            <sbgn:port xmlns:sbgn="http://sbgn.org/libsbgn/0.2" y="733" x="718" id="glyph10.1"/>
+        </sbgn:glyph>
+        <sbgn:glyph xmlns:sbgn="http://sbgn.org/libsbgn/0.2" id="glyph11" compartmentRef="glyph1" class="biological activity" orientation="horizontal">
+            <sbgn:label xmlns:sbgn="http://sbgn.org/libsbgn/0.2" text="ACE"/>
+            <sbgn:bbox xmlns:sbgn="http://sbgn.org/libsbgn/0.2" x="770" y="377" w="119" h="75"/>
+            <sbgn:glyph xmlns:sbgn="http://sbgn.org/libsbgn/0.2" id="glyph11a" class="unit of information" orientation="horizontal">
+                <sbgn:label xmlns:sbgn="http://sbgn.org/libsbgn/0.2" text="a"/>
+                <sbgn:entity xmlns:sbgn="http://sbgn.org/libsbgn/0.2" name="macromolecule"/>
+                <sbgn:bbox xmlns:sbgn="http://sbgn.org/libsbgn/0.2" x="781" y="369" w="25" h="16"/>
+            </sbgn:glyph>
+            <sbgn:port xmlns:sbgn="http://sbgn.org/libsbgn/0.2" y="444" x="793" id="glyph11.2"/>
+            <sbgn:port xmlns:sbgn="http://sbgn.org/libsbgn/0.2" y="380" x="854" id="glyph11.1"/>
+        </sbgn:glyph>
+        <sbgn:glyph xmlns:sbgn="http://sbgn.org/libsbgn/0.2" id="glyph12" compartmentRef="glyph3" class="biological activity" orientation="horizontal">
+            <sbgn:label xmlns:sbgn="http://sbgn.org/libsbgn/0.2" text="Kinase"/>
+            <sbgn:bbox xmlns:sbgn="http://sbgn.org/libsbgn/0.2" x="939" y="204" w="146" h="75"/>
+            <sbgn:glyph xmlns:sbgn="http://sbgn.org/libsbgn/0.2" id="glyph12a" class="unit of information" orientation="horizontal">
+                <sbgn:label xmlns:sbgn="http://sbgn.org/libsbgn/0.2" text="w"/>
+                <sbgn:entity xmlns:sbgn="http://sbgn.org/libsbgn/0.2" name="macromolecule"/>
+                <sbgn:bbox xmlns:sbgn="http://sbgn.org/libsbgn/0.2" x="954" y="196" w="25" h="16"/>
+            </sbgn:glyph>
+            <sbgn:port xmlns:sbgn="http://sbgn.org/libsbgn/0.2" y="279" x="1014" id="glyph12.2"/>
+            <sbgn:port xmlns:sbgn="http://sbgn.org/libsbgn/0.2" y="252" x="942" id="glyph12.1"/>
+        </sbgn:glyph>
+        <sbgn:glyph xmlns:sbgn="http://sbgn.org/libsbgn/0.2" id="glyph13" compartmentRef="glyph3" class="biological activity" orientation="horizontal">
+            <sbgn:label xmlns:sbgn="http://sbgn.org/libsbgn/0.2" text="ACE"/>
+            <sbgn:bbox xmlns:sbgn="http://sbgn.org/libsbgn/0.2" x="959" y="377" w="119" h="75"/>
+            <sbgn:glyph xmlns:sbgn="http://sbgn.org/libsbgn/0.2" id="glyph13a" class="unit of information" orientation="horizontal">
+                <sbgn:label xmlns:sbgn="http://sbgn.org/libsbgn/0.2" text="abc"/>
+                <sbgn:entity xmlns:sbgn="http://sbgn.org/libsbgn/0.2" name="complex"/>
+                <sbgn:bbox xmlns:sbgn="http://sbgn.org/libsbgn/0.2" x="971" y="369" w="45" h="16"/>
+            </sbgn:glyph>
+            <sbgn:port xmlns:sbgn="http://sbgn.org/libsbgn/0.2" y="368" x="1067" id="glyph13.2"/>
+            <sbgn:port xmlns:sbgn="http://sbgn.org/libsbgn/0.2" y="355" x="1017" id="glyph13.1"/>
+        </sbgn:glyph>
+        <sbgn:glyph xmlns:sbgn="http://sbgn.org/libsbgn/0.2" id="glyph14" compartmentRef="glyph2" class="biological activity" orientation="horizontal">
+            <sbgn:label xmlns:sbgn="http://sbgn.org/libsbgn/0.2" text="blabla"/>
+            <sbgn:bbox xmlns:sbgn="http://sbgn.org/libsbgn/0.2" x="1134" y="204" w="135" h="75"/>
+            <sbgn:glyph xmlns:sbgn="http://sbgn.org/libsbgn/0.2" id="glyph14a" class="unit of information" orientation="horizontal">
+                <sbgn:label xmlns:sbgn="http://sbgn.org/libsbgn/0.2" text="text"/>
+                <sbgn:entity xmlns:sbgn="http://sbgn.org/libsbgn/0.2" name="simple chemical"/>
+                <sbgn:bbox xmlns:sbgn="http://sbgn.org/libsbgn/0.2" x="1148" y="196" w="55" h="16"/>
+            </sbgn:glyph>
+            <sbgn:port xmlns:sbgn="http://sbgn.org/libsbgn/0.2" y="183" x="1200" id="glyph14.2"/>
+            <sbgn:port xmlns:sbgn="http://sbgn.org/libsbgn/0.2" y="274" x="1168" id="glyph14.1"/>
+            <sbgn:port xmlns:sbgn="http://sbgn.org/libsbgn/0.2" y="279" x="1212" id="glyph14.3"/>
+        </sbgn:glyph>
+        <sbgn:glyph xmlns:sbgn="http://sbgn.org/libsbgn/0.2" id="glyph15" compartmentRef="glyph2" class="perturbation" orientation="horizontal">
+            <sbgn:label xmlns:sbgn="http://sbgn.org/libsbgn/0.2" text="NaCl"/>
+            <sbgn:bbox xmlns:sbgn="http://sbgn.org/libsbgn/0.2" x="1137" y="54" w="121" h="75"/>
+            <sbgn:port xmlns:sbgn="http://sbgn.org/libsbgn/0.2" y="110" x="1145" id="glyph15.2"/>
+            <sbgn:port xmlns:sbgn="http://sbgn.org/libsbgn/0.2" y="129" x="1199" id="glyph15.1"/>
+        </sbgn:glyph>
+        <sbgn:glyph xmlns:sbgn="http://sbgn.org/libsbgn/0.2" id="glyph16" compartmentRef="glyph1" class="perturbation" orientation="horizontal">
+            <sbgn:label xmlns:sbgn="http://sbgn.org/libsbgn/0.2" text="ajout calcium"/>
+            <sbgn:bbox xmlns:sbgn="http://sbgn.org/libsbgn/0.2" x="170" y="377" w="246" h="75"/>
+            <sbgn:port xmlns:sbgn="http://sbgn.org/libsbgn/0.2" y="374" x="378" id="glyph16.2"/>
+            <sbgn:port xmlns:sbgn="http://sbgn.org/libsbgn/0.2" y="450" x="255" id="glyph16.1"/>
+            <sbgn:port xmlns:sbgn="http://sbgn.org/libsbgn/0.2" y="375" x="382" id="glyph16.3"/>
+        </sbgn:glyph>
+        <sbgn:glyph xmlns:sbgn="http://sbgn.org/libsbgn/0.2" id="glyph17" compartmentRef="glyph2" class="phenotype" orientation="horizontal">
+            <sbgn:label xmlns:sbgn="http://sbgn.org/libsbgn/0.2" text="transcription"/>
+            <sbgn:bbox xmlns:sbgn="http://sbgn.org/libsbgn/0.2" x="1135" y="377" w="230" h="75"/>
+            <sbgn:port xmlns:sbgn="http://sbgn.org/libsbgn/0.2" y="446" x="1188" id="glyph17.2"/>
+            <sbgn:port xmlns:sbgn="http://sbgn.org/libsbgn/0.2" y="356" x="1234" id="glyph17.1"/>
+        </sbgn:glyph>
+        <sbgn:glyph xmlns:sbgn="http://sbgn.org/libsbgn/0.2" id="glyph18" compartmentRef="glyph1" class="biological activity" orientation="horizontal">
+            <sbgn:label xmlns:sbgn="http://sbgn.org/libsbgn/0.2" text="bvogag"/>
+            <sbgn:bbox xmlns:sbgn="http://sbgn.org/libsbgn/0.2" x="505" y="575" w="151" h="75"/>
+            <sbgn:glyph xmlns:sbgn="http://sbgn.org/libsbgn/0.2" id="glyph18a" class="unit of information" orientation="horizontal">
+                <sbgn:label xmlns:sbgn="http://sbgn.org/libsbgn/0.2" text="l"/>
+                <sbgn:entity xmlns:sbgn="http://sbgn.org/libsbgn/0.2" name="macromolecule"/>
+                <sbgn:bbox xmlns:sbgn="http://sbgn.org/libsbgn/0.2" x="521" y="567" w="25" h="16"/>
+            </sbgn:glyph>
+            <sbgn:port xmlns:sbgn="http://sbgn.org/libsbgn/0.2" y="566" x="637" id="glyph18.2"/>
+            <sbgn:port xmlns:sbgn="http://sbgn.org/libsbgn/0.2" y="649" x="602" id="glyph18.1"/>
+            <sbgn:port xmlns:sbgn="http://sbgn.org/libsbgn/0.2" y="568" x="638" id="glyph18.3"/>
+        </sbgn:glyph>
+        <sbgn:arc xmlns:sbgn="http://sbgn.org/libsbgn/0.2" source="glyph7.1" target="glyph5.1" class="positive influence" id="arc1">
+            <sbgn:start xmlns:sbgn="http://sbgn.org/libsbgn/0.2" y="564.672374999999988" x="125.487000000000009"/>
+            <sbgn:end xmlns:sbgn="http://sbgn.org/libsbgn/0.2" y="458.622374999999977" x="623.782500000000027"/>
+        </sbgn:arc>
+        <sbgn:arc xmlns:sbgn="http://sbgn.org/libsbgn/0.2" source="glyph9.1" target="glyph10.1" class="negative influence" id="arc2">
+            <sbgn:start xmlns:sbgn="http://sbgn.org/libsbgn/0.2" y="673.332374999999956" x="755.602499999999964"/>
+            <sbgn:end xmlns:sbgn="http://sbgn.org/libsbgn/0.2" y="733.146375000000035" x="718.402500000000032"/>
+        </sbgn:arc>
+        <sbgn:arc xmlns:sbgn="http://sbgn.org/libsbgn/0.2" source="glyph11.1" target="glyph4.1" class="logic arc" id="arc3">
+            <sbgn:start xmlns:sbgn="http://sbgn.org/libsbgn/0.2" y="357.642374999999959" x="873.322500000000105"/>
+            <sbgn:end xmlns:sbgn="http://sbgn.org/libsbgn/0.2" y="348.792374999999936" x="1415.572499999999991"/>
+        </sbgn:arc>
+        <sbgn:arc xmlns:sbgn="http://sbgn.org/libsbgn/0.2" source="glyph4.2" target="glyph8.1" class="logic arc" id="arc4">
+            <sbgn:start xmlns:sbgn="http://sbgn.org/libsbgn/0.2" y="483.252374999999972" x="1381.417499999999791"/>
+            <sbgn:end xmlns:sbgn="http://sbgn.org/libsbgn/0.2" y="558.207374999999956" x="1289.542500000000018"/>
+        </sbgn:arc>
+        <sbgn:arc xmlns:sbgn="http://sbgn.org/libsbgn/0.2" source="glyph5.2" target="glyph8.2" class="logic arc" id="arc5">
+            <sbgn:start xmlns:sbgn="http://sbgn.org/libsbgn/0.2" y="456.642375000000015" x="719.752499999999941"/>
+            <sbgn:end xmlns:sbgn="http://sbgn.org/libsbgn/0.2" y="596.862374999999929" x="1144.207499999999982"/>
+        </sbgn:arc>
+        <sbgn:arc xmlns:sbgn="http://sbgn.org/libsbgn/0.2" source="glyph16.1" target="glyph7.2" class="logic arc" id="arc6">
+            <sbgn:start xmlns:sbgn="http://sbgn.org/libsbgn/0.2" y="476.832374999999956" x="224.692499999999995"/>
+            <sbgn:end xmlns:sbgn="http://sbgn.org/libsbgn/0.2" y="560.502375000000029" x="135.916499999999985"/>
+        </sbgn:arc>
+        <sbgn:arc xmlns:sbgn="http://sbgn.org/libsbgn/0.2" source="glyph6" target="glyph7.3" class="logic arc" id="arc7">
+            <sbgn:start xmlns:sbgn="http://sbgn.org/libsbgn/0.2" y="456.417374999999993" x="467.932500000000005"/>
+            <sbgn:end xmlns:sbgn="http://sbgn.org/libsbgn/0.2" y="558.672374999999988" x="134.0505"/>
+        </sbgn:arc>
+        <sbgn:arc xmlns:sbgn="http://sbgn.org/libsbgn/0.2" source="glyph8.3" target="glyph9.2" class="necessary stimulation" id="arc8">
+            <sbgn:start xmlns:sbgn="http://sbgn.org/libsbgn/0.2" y="612.597374999999943" x="1079.257499999999936"/>
+            <sbgn:end xmlns:sbgn="http://sbgn.org/libsbgn/0.2" y="612.597374999999943" x="910.3125"/>
+        </sbgn:arc>
+        <sbgn:arc xmlns:sbgn="http://sbgn.org/libsbgn/0.2" source="glyph18.1" target="glyph10.2" class="positive influence" id="arc9">
+            <sbgn:start xmlns:sbgn="http://sbgn.org/libsbgn/0.2" y="673.332374999999956" x="617.4375"/>
+            <sbgn:end xmlns:sbgn="http://sbgn.org/libsbgn/0.2" y="733.146375000000035" x="653.902500000000032"/>
+        </sbgn:arc>
+        <sbgn:arc xmlns:sbgn="http://sbgn.org/libsbgn/0.2" source="glyph11.2" target="glyph18.2" class="positive influence" id="arc10">
+            <sbgn:start xmlns:sbgn="http://sbgn.org/libsbgn/0.2" y="476.907375000000002" x="752.632499999999936"/>
+            <sbgn:end xmlns:sbgn="http://sbgn.org/libsbgn/0.2" y="566.757374999999911" x="637.657500000000027"/>
+        </sbgn:arc>
+        <sbgn:arc xmlns:sbgn="http://sbgn.org/libsbgn/0.2" source="glyph12.1" target="glyph16.2" class="unknown influence" id="arc11">
+            <sbgn:start xmlns:sbgn="http://sbgn.org/libsbgn/0.2" y="267.417374999999993" x="832.747500000000059"/>
+            <sbgn:end xmlns:sbgn="http://sbgn.org/libsbgn/0.2" y="374.427374999999984" x="378.997500000000059"/>
+        </sbgn:arc>
+        <sbgn:arc xmlns:sbgn="http://sbgn.org/libsbgn/0.2" source="glyph12.2" target="glyph13.1" class="unknown influence" id="arc12">
+            <sbgn:start xmlns:sbgn="http://sbgn.org/libsbgn/0.2" y="301.782375000000002" x="1015.057500000000005"/>
+            <sbgn:end xmlns:sbgn="http://sbgn.org/libsbgn/0.2" y="355.932374999999979" x="1017.067499999999995"/>
+        </sbgn:arc>
+        <sbgn:arc xmlns:sbgn="http://sbgn.org/libsbgn/0.2" source="glyph14.1" target="glyph13.2" class="negative influence" id="arc13">
+            <sbgn:start xmlns:sbgn="http://sbgn.org/libsbgn/0.2" y="301.047374999999988" x="1140.352499999999964"/>
+            <sbgn:end xmlns:sbgn="http://sbgn.org/libsbgn/0.2" y="368.472375" x="1067.107500000000073"/>
+        </sbgn:arc>
+        <sbgn:arc xmlns:sbgn="http://sbgn.org/libsbgn/0.2" source="glyph15.1" target="glyph14.2" class="positive influence" id="arc14">
+            <sbgn:start xmlns:sbgn="http://sbgn.org/libsbgn/0.2" y="145.962375000000065" x="1199.827499999999873"/>
+            <sbgn:end xmlns:sbgn="http://sbgn.org/libsbgn/0.2" y="183.19237499999997" x="1200.892499999999927"/>
+        </sbgn:arc>
+        <sbgn:arc xmlns:sbgn="http://sbgn.org/libsbgn/0.2" source="glyph14.3" target="glyph17.1" class="necessary stimulation" id="arc15">
+            <sbgn:start xmlns:sbgn="http://sbgn.org/libsbgn/0.2" y="302.007375000000025" x="1219.012500000000045"/>
+            <sbgn:end xmlns:sbgn="http://sbgn.org/libsbgn/0.2" y="356.682374999999922" x="1234.537500000000136"/>
+        </sbgn:arc>
+        <sbgn:arc xmlns:sbgn="http://sbgn.org/libsbgn/0.2" source="glyph15.2" target="glyph16.3" class="negative influence" id="arc16">
+            <sbgn:start xmlns:sbgn="http://sbgn.org/libsbgn/0.2" y="150.342374999999947" x="1020.442499999999995"/>
+            <sbgn:end xmlns:sbgn="http://sbgn.org/libsbgn/0.2" y="375.342374999999947" x="382.47750000000002"/>
+        </sbgn:arc>
+        <sbgn:arc xmlns:sbgn="http://sbgn.org/libsbgn/0.2" source="glyph17.2" target="glyph18.3" class="unknown influence" id="arc17">
+            <sbgn:start xmlns:sbgn="http://sbgn.org/libsbgn/0.2" y="456.627374999999972" x="1164.472500000000082"/>
+            <sbgn:end xmlns:sbgn="http://sbgn.org/libsbgn/0.2" y="568.842374999999947" x="638.4375"/>
+        </sbgn:arc>
+    </sbgn:map>
+</sbgn>

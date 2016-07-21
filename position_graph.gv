@@ -1,0 +1,43 @@
+digraph G {
+	subgraph cluster_0 {
+		glyph12 [label=Kinase]
+		glyph13 [label=ACE]
+	}
+	subgraph cluster_1 {
+		glyph5 [label=ERK]
+		glyph6 [label=acide]
+		glyph9 [label="Beta BBB"]
+		glyph10 [label=apoptose]
+		glyph11 [label=ACE]
+		glyph16 [label="ajout calcium"]
+		glyph18 [label=bvogag]
+	}
+	subgraph cluster_2 {
+		glyph14 [label=blabla]
+		glyph15 [label=NaCl]
+		glyph17 [label=transcription]
+	}
+	glyph1 [label=""]
+	glyph2 [label=""]
+	glyph3 [label=""]
+	glyph4 [label=NOT shape=circle]
+	glyph7 [label=OR shape=circle]
+	glyph8 [label=AND shape=circle]
+		glyph7 -> glyph5 [tailclip=true]
+		glyph9 -> glyph10 [tailclip=true]
+		glyph11 -> glyph4 [tailclip=true]
+		glyph4 -> glyph8 [tailclip=true]
+		glyph5 -> glyph8 [tailclip=true]
+		glyph16 -> glyph7 [tailclip=true]
+		glyph6 -> glyph7 [tailclip=true]
+		glyph8 -> glyph9 [tailclip=true]
+		glyph18 -> glyph10 [tailclip=true]
+		glyph11 -> glyph18 [tailclip=true]
+		glyph12 -> glyph16 [tailclip=true]
+		glyph12 -> glyph13 [tailclip=true]
+		glyph14 -> glyph13 [tailclip=true]
+		glyph15 -> glyph14 [tailclip=true]
+		glyph14 -> glyph17 [tailclip=true]
+		glyph15 -> glyph16 [tailclip=true]
+		glyph17 -> glyph18 [tailclip=true]
+}

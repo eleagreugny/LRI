@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?><sbgn xmlns="http://sbgn.org/libsbgn/0.2">
+    <sbgn:map xmlns:sbgn="http://sbgn.org/libsbgn/0.2" language="activity flow">
+        <sbgn:glyph xmlns:sbgn="http://sbgn.org/libsbgn/0.2" id="glyph1" class="biological activity" orientation="horizontal">
+            <sbgn:bbox xmlns:sbgn="http://sbgn.org/libsbgn/0.2" x="0" y="2" w="0" h="1"/>
+        </sbgn:glyph>
+    </sbgn:map>
+</sbgn>
