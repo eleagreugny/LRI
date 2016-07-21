@@ -17,14 +17,17 @@ class TraductionAF:
     fichier texte en langage SBGN-AF avec la library libsbgnpy.
     Pour obtenir les positions absolues des arcs et des noeuds,
     on utilise la library graphviz (langage DOT).
+    -------------------------------------------------------------------
+    @author: Elea Greugny
+    @date: 21/07/16
     """
-    def __init__(self, fichier):
-        self.data = open(fichier, 'r')
+    def __init__(self, fichier_entree, fichier_sortie):
+        self.data = open(fichier_entree, 'r')
         self.sbgn = libsbgn.sbgn()
         self.map = libsbgn.map()
         self.map.set_language(Language.AF)
         self.sbgn.set_map(self.map)
-        self.f_out = 'tradAF.sbgn'
+        self.f_out = fichier_sortie
         #résolution de l'image : pixels / inch 
         self.resolution = 150
 
@@ -478,12 +481,18 @@ class TraductionAF:
                 self.set_comp_position(line[1])
 
     def output_f(self):
+        """Création du fichier de sortie .sbgn"""
         self.sbgn.write_file(self.f_out)
 
+    def translation(self):
+        """Enchainement des méthodes pour traduire le graphe SBGNLog-AF
+        en graph SBGN-AF."""
+        self.LogAF_to_AF()
+        self.output_f()
+
 #test
-trad = TraductionAF('tradLog.txt')
-trad.LogAF_to_AF()
-trad.output_f()
+trad = TraductionAF('tradLog.txt', 'tradAF.sbgn')
+trad.translation()
 f = open('position_graph.gv.plain', 'r')
 print(f.readline())
 for line in f.readlines():
