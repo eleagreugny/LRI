@@ -72,6 +72,15 @@
                 <bbox y="177.0" x="377.5" h="16.0" w="21.0"/>
             </glyph>
         </glyph>
+        <glyph compartmentRef="glyph11" id="glyph10" class="biological activity">
+            <label text="bvogag"/>
+            <bbox y="470.0" x="356.0" h="60.0" w="108.0"/>
+            <glyph id="glyph10a" class="unit of information">
+                <label text="l"/>
+                <entity name="macromolecule"/>
+                <bbox y="462.0" x="374.5" h="16.0" w="17.0"/>
+            </glyph>
+        </glyph>
         <glyph compartmentRef="glyph12" id="glyph13" class="biological activity">
             <label text="Kinase"/>
             <bbox y="215.0" x="646.0" h="60.0" w="108.0"/>
@@ -99,6 +108,10 @@
                 <bbox y="557.0" x="625.0" h="26.0" w="26.0"/>
             </glyph>
         </glyph>
+        <glyph compartmentRef="glyph15" id="glyph18" class="phenotype">
+            <label text="transcription"/>
+            <bbox y="620.0" x="751.0" h="60.0" w="108.0"/>
+        </glyph>
         <glyph compartmentRef="glyph15" id="glyph16" class="perturbation">
             <label text="NaCl"/>
             <bbox y="540.0" x="896.0" h="60.0" w="108.0"/>
@@ -106,19 +119,6 @@
         <glyph compartmentRef="glyph11" id="glyph3" class="perturbation">
             <label text="ajout calcium"/>
             <bbox y="95.0" x="295.0" h="50.0" w="170.0"/>
-        </glyph>
-        <glyph compartmentRef="glyph15" id="glyph18" class="phenotype">
-            <label text="transcription"/>
-            <bbox y="620.0" x="751.0" h="60.0" w="108.0"/>
-        </glyph>
-        <glyph compartmentRef="glyph11" id="glyph10" class="biological activity">
-            <label text="bvogag"/>
-            <bbox y="470.0" x="356.0" h="60.0" w="108.0"/>
-            <glyph id="glyph10a" class="unit of information">
-                <label text="l"/>
-                <entity name="macromolecule"/>
-                <bbox y="462.0" x="374.5" h="16.0" w="17.0"/>
-            </glyph>
         </glyph>
         <arc target="glyph2" source="glyph5.2" id="arc4" class="positive influence">
             <start y="262.0" x="305.0"/>
@@ -183,11 +183,6 @@
         <arc target="glyph3" source="glyph16" id="arc16" class="negative influence">
             <start y="540.0" x="912.0"/>
             <end y="145.0" x="411.66666"/>
-        </arc>
-        <arc target="glyph10" source="glyph18" id="arc17" class="unknown influence">
-            <start y="680.0" x="768.82355"/>
-            <next y="820.0" x="600.0"/>
-            <end y="530.0" x="427.8125"/>
         </arc>
     </map>
 </sbgn>

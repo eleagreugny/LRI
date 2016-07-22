@@ -3,10 +3,10 @@
         <sbgn:bbox xmlns:sbgn="http://sbgn.org/libsbgn/0.2" x="0" y="0" w="1855" h="879"/>
         <sbgn:glyph xmlns:sbgn="http://sbgn.org/libsbgn/0.2" id="glyph1" class="compartment" orientation="horizontal">
             <sbgn:label xmlns:sbgn="http://sbgn.org/libsbgn/0.2" text=""/>
-            <sbgn:bbox xmlns:sbgn="http://sbgn.org/libsbgn/0.2" x="131" y="352" w="790" h="492"/>
+            <sbgn:bbox xmlns:sbgn="http://sbgn.org/libsbgn/0.2" x="96" y="329" w="1486" h="516"/>
             <sbgn:glyph xmlns:sbgn="http://sbgn.org/libsbgn/0.2" id="glyph1a" class="unit of information" orientation="horizontal">
                 <sbgn:label xmlns:sbgn="http://sbgn.org/libsbgn/0.2" text="Infected Cell"/>
-                <sbgn:bbox xmlns:sbgn="http://sbgn.org/libsbgn/0.2" x="210" y="342" w="145" h="20"/>
+                <sbgn:bbox xmlns:sbgn="http://sbgn.org/libsbgn/0.2" x="245" y="319" w="145" h="20"/>
             </sbgn:glyph>
         </sbgn:glyph>
         <sbgn:glyph xmlns:sbgn="http://sbgn.org/libsbgn/0.2" id="glyph2" class="compartment" orientation="horizontal">

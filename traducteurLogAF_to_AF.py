@@ -69,7 +69,8 @@ class TraductionAF:
         'unknownInfluences' : self.create_arc,
         'necessarilyStimulates' : self.create_arc,
         'localized' : self.create_localisation,
-        'uoi' : self.create_unitOfInformation}
+        'uoi' : self.create_unitOfInformation,
+        'biologicalActivity' : self.create_glyph}
 
         #dictionnaire des types de glyphes
         self.dic_glyph_type = {'ba' : GlyphClass.BIOLOGICAL_ACTIVITY,
@@ -77,7 +78,8 @@ class TraductionAF:
 		'phenotype' : GlyphClass.PHENOTYPE, 'and' : GlyphClass.AND,
 		'or' : GlyphClass.OR, 'not' : GlyphClass.NOT,
 		'delay' : GlyphClass.DELAY,
-		'compartment' : GlyphClass.COMPARTMENT}
+		'compartment' : GlyphClass.COMPARTMENT,
+        'biologicalActivity' : GlyphClass.BIOLOGICAL_ACTIVITY}
 
         #dictionnaire de type d'arcs
         self.dic_arc_type = {'input' : ArcClass.LOGIC_ARC,
@@ -99,7 +101,7 @@ class TraductionAF:
 
         #Graphe en langage DOT
         self.dot_graph = Digraph('G', filename='position_graph_sbgn.gv',
-        format='plain')
+        format='pdf')
 
         #hauteur et largeur du graphe en pixels : mise à jour au moment
         #de la lecture du fichier .gv.plain
@@ -120,6 +122,7 @@ class TraductionAF:
         self.dic_id_glyph[gly.get_id()] = gly
         if cls == GlyphClass.COMPARTMENT:
             self.dic_comp[gly] = []
+        print(const + ' -> ' + gly.get_id())
 
     def create_arc(self, const_s, const_t, cls_arc):
         """Crée un objet arc de type cls_a.
@@ -170,7 +173,8 @@ class TraductionAF:
         """Crée un objet label avec  pour attribut text la chaîne
         de caractère lab passée en paramètre, et l'associe au glyphe
         de constante logique const grâce au dictionnaire d'id."""
-        lab = str(lab).replace('"', '')
+        lab = lab.decode('ISO-8859-7')
+        lab = lab.replace('"', '')
         label = libsbgn.label(text=lab)
         self.dic_const_glyph[const_g].set_label(label)
 
@@ -213,8 +217,26 @@ class TraductionAF:
 
         self.dic_const_glyph[const_g].add_glyph(uoi)
 
+    def logic_nodes_localisation(self):
+        """Place les glyphs logiques (or, and, not, delay) dans le
+        compartment d'un de leur input. Si aucun de leur input n'est
+        associé à un compartment, le glyph reste sans compartment."""
+        for gly in self.single_glyph:
+            if gly.get_class() in self.dic_log_op.keys():
+                for couple in self.dic_glyph_arc[gly]:
+                    if couple[0] == 't':
+                        id_source = couple[1].get_source()
+                        if '.' in id_source:
+                            id_source = id_source[:id_source.find('.')]
+                        source = self.dic_id_glyph[id_source]
+                        if source.get_compartmentRef():
+                            comp = self.dic_id_glyph[source.get_compartmentRef()]
+                            self.dic_comp[comp].append(gly)
+                            del self.single_glyph[self.single_glyph.index(gly)]
+                            break
+
     def LogAF_to_AF(self):
-        """Lis le fichier .txt dans le langage SBGN-AF
+        """Lis le fichier d'entrée dans le langage SBGN-AF
         et crée les objets correspondants dans la library libsbgnpy."""
         data = self.data.readlines()
         for line in data:
@@ -260,6 +282,7 @@ class TraductionAF:
                         params = [const_g, cls_ui, label]
                         func = self.dic_func[predicate]
                         func(*params)
+        self.logic_nodes_localisation()
         self.create_dot_graph()
         self.dot_graph.render('position_graph.gv', view=False)
         self.read_dot()
@@ -404,6 +427,7 @@ class TraductionAF:
     def set_arc_position(self, id_source, id_target, points):
         """Calcul du tracé de l'arc reliant source à target, passant
         par les éléments de la liste points (tuples (x, y))"""
+        print(id_source, id_target)
         source = self.dic_id_glyph[id_source]
         #recherche de l'arc
         for couple in self.dic_glyph_arc[source]:
@@ -491,10 +515,14 @@ class TraductionAF:
         self.output_f()
 
 #test
+"""
 trad = TraductionAF('tradLog.txt', 'tradAF.sbgn')
 trad.translation()
 f = open('position_graph.gv.plain', 'r')
 print(f.readline())
 for line in f.readlines():
     print (line)
+"""
+test = TraductionAF('erk_af_pruned.asp', 'erk_af_pruned.sbgn')
+test.translation()
 
