@@ -12,9 +12,7 @@ import libsbgnpy.libsbgn as libsbgn # import the bindings
 from libsbgnpy.libsbgnUtils import print_bbox # some additional helpers
 from libsbgnpy.libsbgnTypes import Language, GlyphClass, ArcClass
 
-
-
-
+from tradParams import tradParams
 
 class TraductionAF:
     """
@@ -34,7 +32,7 @@ class TraductionAF:
         self.sbgn.set_map(self.map)
         self.f_out = fichier_sortie
         #résolution de l'image : pixels / inch 
-        self.resolution = 150
+        self.resolution = tradParams.RESOLUTION
 
         #compteur de glyphs
         self.nb_glyph = 0
@@ -411,14 +409,16 @@ class TraductionAF:
         glyph gly. Les coordonnées de gly doivent avoir été calculées
         avant."""
         if gly.get_class() == GlyphClass.COMPARTMENT:
-            h_uoi = 20
+            h_uoi = tradParams.HEIGHT_COMPARTMENT_UOI
         else:
-            h_uoi = 16
+            h_uoi = tradParams.HEIGHT_GLYPH_UOI
 
         try:
-            w_uoi = 15 + 10 * len(gly.get_glyph()[0].get_label().get_text())
+            w_uoi = (tradParams.WIDTH_EMPTY_UOI +
+            tradParams.WIDTH_MAX_LETTER *
+            len(gly.get_glyph()[0].get_label().get_text()))
         except:
-            w_uoi = 15
+            w_uoi = tradParams.WIDTH_EMPTY_UOI
 
         x_gly = gly.get_bbox().get_x()
         y_gly = gly.get_bbox().get_y()
