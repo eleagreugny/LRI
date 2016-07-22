@@ -1,15 +1,20 @@
-#!/usr/bin/python
+#!/usr/bin/env python2.7
 # -*- coding: utf-8 -*-
 
 from __future__ import print_function
+from __future__ import unicode_literals
+import re
+import codecs
+from graphviz import Digraph
+
 import libsbgnpy.libsbgn as libsbgn # import the bindings
 
 from libsbgnpy.libsbgnUtils import print_bbox # some additional helpers
 from libsbgnpy.libsbgnTypes import Language, GlyphClass, ArcClass
 
-import re
 
-from graphviz import Digraph
+
+
 
 class TraductionAF:
     """
@@ -22,7 +27,7 @@ class TraductionAF:
     @date: 21/07/16
     """
     def __init__(self, fichier_entree, fichier_sortie):
-        self.data = open(fichier_entree, 'r')
+        self.data = codecs.open(fichier_entree, 'r', 'utf-8')
         self.sbgn = libsbgn.sbgn()
         self.map = libsbgn.map()
         self.map.set_language(Language.AF)
@@ -101,7 +106,7 @@ class TraductionAF:
 
         #Graphe en langage DOT
         self.dot_graph = Digraph('G', filename='position_graph_sbgn.gv',
-        format='pdf')
+        format='plain')
 
         #hauteur et largeur du graphe en pixels : mise à jour au moment
         #de la lecture du fichier .gv.plain
@@ -122,7 +127,6 @@ class TraductionAF:
         self.dic_id_glyph[gly.get_id()] = gly
         if cls == GlyphClass.COMPARTMENT:
             self.dic_comp[gly] = []
-        print(const + ' -> ' + gly.get_id())
 
     def create_arc(self, const_s, const_t, cls_arc):
         """Crée un objet arc de type cls_a.
@@ -173,9 +177,9 @@ class TraductionAF:
         """Crée un objet label avec  pour attribut text la chaîne
         de caractère lab passée en paramètre, et l'associe au glyphe
         de constante logique const grâce au dictionnaire d'id."""
-        lab = lab.decode('ISO-8859-7')
+        #lab = lab.decode('ISO-8859-7')
         lab = lab.replace('"', '')
-        label = libsbgn.label(text=lab)
+        label = libsbgn.label(text=lab)#.encode('ISO-8859-7'))
         self.dic_const_glyph[const_g].set_label(label)
 
     def create_localisation(self, const_g, const_c):
@@ -201,7 +205,9 @@ class TraductionAF:
         id=str(self.dic_const_glyph[const_g].get_id())+'a', bbox=box)
 
         if self.dic_const_glyph[const_g].get_class() != GlyphClass.COMPARTMENT:
-            lab = libsbgn.label(text=label_ui.replace('"', ''))
+            #lab = label_ui.decode('ISO-8859-7')
+            lab = label_ui.replace('"', '')
+            lab = libsbgn.label(text=lab)#.encode('ISO-8859-7'))
             uoi.set_label(lab)
 
             ent = libsbgn.entityType(name=cls_ui)
@@ -305,7 +311,7 @@ class TraductionAF:
                 else:
                     if glyph.get_label():
                         c.node(glyph.get_id(),
-                        label=glyph.get_label().get_text())
+                        label=glyph.get_label().get_text())#.decode('ISO-8859-7'))
                     else:
                         c.node(glyph.get_id())
             self.dot_graph.subgraph(c)
@@ -318,7 +324,7 @@ class TraductionAF:
             else:
                 if glyph.get_label():
                     self.dot_graph.node(glyph.get_id(),
-                    label=glyph.get_label().get_text())
+                    label=glyph.get_label().get_text())#.decode('ISO-8859-7'))
                 else:
                     self.dot_graph.node(glyph.get_id())
         #création des arcs
@@ -427,7 +433,6 @@ class TraductionAF:
     def set_arc_position(self, id_source, id_target, points):
         """Calcul du tracé de l'arc reliant source à target, passant
         par les éléments de la liste points (tuples (x, y))"""
-        print(id_source, id_target)
         source = self.dic_id_glyph[id_source]
         #recherche de l'arc
         for couple in self.dic_glyph_arc[source]:
@@ -476,7 +481,7 @@ class TraductionAF:
     def read_dot(self):
         """Lecture du fichier .gv.plain et récupération des 
         positions des glyphs et des arcs."""
-        dot = open('position_graph.gv.plain','r')
+        dot = codecs.open('position_graph.gv.plain','r', 'utf-8')
         lines = dot.readlines()
         for i in range(len(lines)):
             lines[i] = lines[i].split()
