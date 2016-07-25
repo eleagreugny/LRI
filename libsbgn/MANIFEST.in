@@ -1,2 +1,0 @@
-include DESCRIPTION.rst README.rst
-recursive-include libsbgnpy *.py *.rst *.xsd *.sbgn *.png
