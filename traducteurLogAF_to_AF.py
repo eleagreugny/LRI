@@ -1,17 +1,17 @@
-#!/usr/bin/env python2.7
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-from __future__ import print_function
-from __future__ import unicode_literals
+#from __future__ import print_function
+#from __future__ import unicode_literals
 import re
 import codecs
 from graphviz import Digraph
+import sys
+sys.path.append("./libsbgn/libsbgnpy")
 
-import libsbgnpy.libsbgn as libsbgn # import the bindings
-
-from libsbgnpy.libsbgnUtils import print_bbox # some additional helpers
-from libsbgnpy.libsbgnTypes import Language, GlyphClass, ArcClass
-
+import libsbgn as ls # import the bindings
+from libsbgnUtils import print_bbox # some additional helpers
+from libsbgnTypes import Language, GlyphClass, ArcClass
 from tradParams import tradParams
 
 class TraductionAF:
@@ -26,8 +26,8 @@ class TraductionAF:
     """
     def __init__(self, fichier_entree, fichier_sortie):
         self.data = codecs.open(fichier_entree, 'r', 'utf-8')
-        self.sbgn = libsbgn.sbgn()
-        self.map = libsbgn.map()
+        self.sbgn = ls.sbgn()
+        self.map = ls.map()
         self.map.set_language(Language.AF)
         self.sbgn.set_map(self.map)
         self.f_out = fichier_sortie
@@ -116,8 +116,8 @@ class TraductionAF:
         L'id sera 'glyphN' où N est le numero du glyph, incrémenté
         à chaque création de glyph."""
         self.nb_glyph += 1
-        box = libsbgn.bbox()
-        gly = libsbgn.glyph(class_=cls, id='glyph' +
+        box = ls.bbox()
+        gly = ls.glyph(class_=cls, id='glyph' +
         str(self.nb_glyph), bbox=box)
         self.map.add_glyph(gly)
         self.dic_const_glyph[const] = gly
@@ -136,7 +136,7 @@ class TraductionAF:
         self.nb_arc += 1
         sour = self.port_management(self.dic_const_glyph[const_s])
         targ = self.port_management(self.dic_const_glyph[const_t])
-        arc = libsbgn.arc(class_=cls_arc, source=sour, target=targ,
+        arc = ls.arc(class_=cls_arc, source=sour, target=targ,
         id='arc' + str(self.nb_arc))
         self.map.add_arc(arc)
         self.dic_glyph_arc[self.dic_const_glyph[const_s]].append(('s', arc))
@@ -157,12 +157,12 @@ class TraductionAF:
         else:
             port_id = (gly.get_id() + '.' +
             str(len(self.dic_glyph_arc[gly])+1))
-            port = libsbgn.port(id=port_id)
+            port = ls.port(id=port_id)
             gly.add_port(port)
             if len(self.dic_glyph_arc[gly]) == 1:
                 port_id2 = (gly.get_id() + '.' +
                 str(len(self.dic_glyph_arc[gly])))
-                port2 = libsbgn.port(id=port_id2)
+                port2 = ls.port(id=port_id2)
                 gly.add_port(port2)
                 first_arc_tuple = self.dic_glyph_arc[gly][0]
                 if first_arc_tuple[0] == 's':
@@ -177,7 +177,7 @@ class TraductionAF:
         de constante logique const grâce au dictionnaire d'id."""
         #lab = lab.decode('ISO-8859-7')
         lab = lab.replace('"', '')
-        label = libsbgn.label(text=lab)#.encode('ISO-8859-7'))
+        label = ls.label(text=lab)#.encode('ISO-8859-7'))
         self.dic_const_glyph[const_g].set_label(label)
 
     def create_localisation(self, const_g, const_c):
@@ -197,26 +197,26 @@ class TraductionAF:
         de l'unité d'information et le glyph de type unité d'information.
         L'id de l'unité d'information est constitué de celui du glyphe
         auquel elle appartient, auquel on ajoute une lettre."""
-        box = libsbgn.bbox()
+        box = ls.bbox()
 
-        uoi = libsbgn.glyph(class_=GlyphClass.UNIT_OF_INFORMATION,
+        uoi = ls.glyph(class_=GlyphClass.UNIT_OF_INFORMATION,
         id=str(self.dic_const_glyph[const_g].get_id())+'a', bbox=box)
 
         if self.dic_const_glyph[const_g].get_class() != GlyphClass.COMPARTMENT:
             #lab = label_ui.decode('ISO-8859-7')
             lab = label_ui.replace('"', '')
-            lab = libsbgn.label(text=lab)#.encode('ISO-8859-7'))
+            lab = ls.label(text=lab)#.encode('ISO-8859-7'))
             uoi.set_label(lab)
 
-            ent = libsbgn.entityType(name=cls_ui)
+            ent = ls.entityType(name=cls_ui)
             uoi.set_entity(ent)
         else:
             cls_ui = cls_ui.replace('"', '')
             label_ui = label_ui.replace('"', '')
             if cls_ui == 'void':
-                lab = libsbgn.label(text=label_ui)
+                lab = ls.label(text=label_ui)
             else:
-                lab = libsbgn.label(text=cls_ui + ':' + label_ui)
+                lab = ls.label(text=cls_ui + ':' + label_ui)
             uoi.set_label(lab)
 
         self.dic_const_glyph[const_g].add_glyph(uoi)
@@ -373,7 +373,7 @@ class TraductionAF:
         gly = self.dic_id_glyph[id_g]
         (x_gly, y_gly, w_gly, h_gly) = self.change_origin_glyph(xdot,
         ydot, wdot, hdot)
-        box = libsbgn.bbox(x=x_gly, y=y_gly, w=w_gly,
+        box = ls.bbox(x=x_gly, y=y_gly, w=w_gly,
         h=h_gly)
         gly.set_bbox(box)
         if gly.get_glyph():
@@ -399,7 +399,7 @@ class TraductionAF:
         h_comp = (y_max - y_min) * 1.1
         x_comp = x_min - 0.05 * w_comp
         y_comp = y_min - 0.05 * h_comp
-        box = libsbgn.bbox(x=x_comp, y=y_comp, w=w_comp, h=h_comp)
+        box = ls.bbox(x=x_comp, y=y_comp, w=w_comp, h=h_comp)
         comp.set_bbox(box)
         if comp.get_glyph():
             self.set_uoi_position(comp)
@@ -427,7 +427,7 @@ class TraductionAF:
         x_uoi = x_gly + 0.1 * w_gly
         y_uoi = y_gly - h_uoi / 2.0
 
-        box = libsbgn.bbox(x=x_uoi, y=y_uoi, w=w_uoi, h=h_uoi)
+        box = ls.bbox(x=x_uoi, y=y_uoi, w=w_uoi, h=h_uoi)
         gly.get_glyph()[0].set_bbox(box)
 
     def set_arc_position(self, id_source, id_target, points):
@@ -449,7 +449,7 @@ class TraductionAF:
             x_p = p[0]
             y_p = p[1]
             (x_p, y_p) = self.coord_dot_to_sbgn(x_p, y_p)
-            trace.append(libsbgn.point(x=x_p, y=y_p))
+            trace.append(ls.point(x=x_p, y=y_p))
         #ajout des points à l'arc
         if len(trace) > 2:
             #arc.set_start(trace[0])
@@ -485,7 +485,7 @@ class TraductionAF:
         lines = dot.readlines()
         for i in range(len(lines)):
             lines[i] = lines[i].split()
-        self.map.set_bbox(libsbgn.bbox(x=0, y=0,
+        self.map.set_bbox(ls.bbox(x=0, y=0,
         w=float(lines[0][2]) * self.resolution * 1.05,
         h=float(lines[0][3]) * self.resolution * 1.05))
         self.max_height = float(lines[0][3]) * self.resolution

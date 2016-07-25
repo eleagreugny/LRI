@@ -1,11 +1,13 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-from __future__ import print_function
-import libsbgnpy.libsbgn as libsbgn # import the bindings
+import sys
+sys.path.append("./libsbgn/libsbgnpy")
 
-from libsbgnpy.libsbgnUtils import print_bbox # some additional helpers
-from libsbgnpy.libsbgnTypes import Language, GlyphClass, ArcClass, Orientation
+import libsbgn as ls # import the bindings
+from libsbgnUtils import print_bbox # some additional helpers
+from libsbgnTypes import Language, GlyphClass, ArcClass
+from libsbgn import parse as ls_parse
 
 class TraductionAFLog:
 	"""
@@ -18,7 +20,7 @@ class TraductionAFLog:
 	"""
 
 	def __init__(self, fichier):
-		self.sbgn = libsbgn.parse(fichier)
+		self.sbgn = ls_parse(fichier)
 		self.map = self.sbgn.get_map()
 		self.glyphs = self.map.get_glyph()
 		self.arcs = self.map.get_arc()
