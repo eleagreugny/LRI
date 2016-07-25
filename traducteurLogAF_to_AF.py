@@ -73,29 +73,6 @@ class TraductionAF:
         'uoi' : self.create_unitOfInformation,
         'biologicalActivity' : self.create_glyph}
 
-        #dictionnaire des types de glyphes
-        self.dic_glyph_type = {'ba' : GlyphClass.BIOLOGICAL_ACTIVITY,
-		'perturbation' : GlyphClass.PERTURBATION,
-		'phenotype' : GlyphClass.PHENOTYPE, 'and' : GlyphClass.AND,
-		'or' : GlyphClass.OR, 'not' : GlyphClass.NOT,
-		'delay' : GlyphClass.DELAY,
-		'compartment' : GlyphClass.COMPARTMENT,
-        'biologicalActivity' : GlyphClass.BIOLOGICAL_ACTIVITY}
-
-        #dictionnaire de type d'arcs
-        self.dic_arc_type = {'input' : ArcClass.LOGIC_ARC,
-        'stimulates' : ArcClass.POSITIVE_INFLUENCE,
-        'inhibits' : ArcClass.NEGATIVE_INFLUENCE,
-        'unknownInfluences' : ArcClass.UNKNOWN_INFLUENCE,
-        'necessarilyStimulates' : ArcClass.NECESSARY_STIMULATION}
-
-        #dictionnaire de type d'unité d'information
-        self.dic_ui_type = {'macromolecule' : 'macromolecule',
-        'naf' : 'nucleic acid feature', 'complex' : 'complex',
-        'simplechemical' : 'simple chemical',
-        'unspecifiedentity' : 'unspecified entity',
-        'void' : '"void"'}
-
         #dictionnaire des opérateurs logiques et labels associés
         self.dic_log_op = {GlyphClass.AND : 'AND', GlyphClass.OR : 'OR',
         GlyphClass.NOT : 'NOT', GlyphClass.DELAY : 'T'}
@@ -225,7 +202,7 @@ class TraductionAF:
         compartment d'un de leur input. Si aucun de leur input n'est
         associé à un compartment, le glyph reste sans compartment."""
         for gly in self.single_glyph:
-            if gly.get_class() in self.dic_log_op.keys():
+            if gly.get_class() in tradParams.DIC_LOG_OP.keys():
                 for couple in self.dic_glyph_arc[gly]:
                     if couple[0] == 't':
                         id_source = couple[1].get_source()
@@ -249,7 +226,7 @@ class TraductionAF:
             if len(line) == 3:
                 #predicats du type : predicat(a)
                 const = line[1]
-                cls = self.dic_glyph_type[predicate]
+                cls = tradParams.DIC_GLYPH_TYPE[predicate]
                 params = [const, cls]
                 func = self.dic_func[predicate]
                 func(*params)
@@ -259,10 +236,10 @@ class TraductionAF:
             #second parcours pour les autres prédicats
             line = re.split('[(,)]', line)
             predicate = line[0]
-            if predicate in self.dic_arc_type.keys():
+            if predicate in tradParams.DIC_ARC_TYPE.keys():
                 const_s = line[1]
                 const_t = line[2]
-                cls_a = self.dic_arc_type[predicate]
+                cls_a = tradParams.DIC_ARC_TYPE[predicate]
                 params = [const_s, const_t, cls_a]
                 func = self.dic_func[predicate]
                 func(*params)
@@ -280,7 +257,7 @@ class TraductionAF:
                     #(affectation des unités auxiliaires)
                     if predicate in self.dic_func.keys():
                         const_g = line[1]
-                        cls_ui = self.dic_ui_type[line[2].replace('"', '')]
+                        cls_ui = tradParams.DIC_UI_TYPE[line[2].replace('"', '')]
                         label = line[3]
                         params = [const_g, cls_ui, label]
                         func = self.dic_func[predicate]
@@ -302,9 +279,9 @@ class TraductionAF:
             c = Digraph(cluster_name, encoding='utf8')
             print(c.encoding)
             for glyph in self.dic_comp[comp]:
-                if (glyph.get_class() in self.dic_log_op.keys()):
+                if (glyph.get_class() in tradParams.DIC_LOG_OP.keys()):
                     c.node(glyph.get_id(),
-                    label=self.dic_log_op[glyph.get_class()],
+                    label=tradParams.DIC_LOG_OP[glyph.get_class()],
                     shape='circle')
                 else:
                     if glyph.get_label():
@@ -316,9 +293,9 @@ class TraductionAF:
             comp_index += 1
         #création des node hors compartment
         for glyph in self.single_glyph:
-            if (glyph.get_class() in self.dic_log_op.keys()):
+            if (glyph.get_class() in tradParams.DIC_LOG_OP.keys()):
                 self.dot_graph.node(glyph.get_id(),
-                label=self.dic_log_op[glyph.get_class()], shape='circle')
+                label=tradParams.DIC_LOG_OP[glyph.get_class()], shape='circle')
             else:
                 if glyph.get_label():
                     self.dot_graph.node(glyph.get_id(),
@@ -390,7 +367,7 @@ class TraductionAF:
         """Calcul des coordonnées x et y du glyph d'identifiant id_g
         à partir des cordonnées xdot et ydot fournies par DOT."""
         gly = self.dic_id_glyph[id_g]
-        if gly.get_class() in self.dic_log_op.keys():
+        if gly.get_class() in tradParams.DIC_LOG_OP.keys():
             (x_gly, y_gly) = self.change_origin_logop(xdot, ydot)
             w_gly = tradParams.LOG_OP_DIM
             h_gly = tradParams.LOG_OP_DIM
