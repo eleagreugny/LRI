@@ -16,3 +16,6 @@ class tradParams :
 
     #largeur max d'une lettre (w)
     WIDTH_MAX_LETTER = 10
+
+    #dimension de la box d'un opérateur logique
+    LOG_OP_DIM = 42

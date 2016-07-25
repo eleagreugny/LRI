@@ -375,17 +375,28 @@ class TraductionAF:
         coin supérieur gauche.
         De plus, en langage DOT, un glyph est caractérisé par le centre
         du rectangle, tandis que le langage SBGN le caractérise
-        par son soin supérieur gauche. Cette méthode permet donc de
-        calculer les coordonnées du coin supérieur gauche d'un glyph,
-        à partir de celles du centre de son rectangle exprimées en inch.
-        Cette méthode renvoie un tuple (xsbgn, ysbgn, wsbgn, hsbgn)"""
+        par son soin supérieur gauche.
+        Cette méthode permet donc de calculer les coordonnées du coin
+        supérieur gauche d'un glyph de type opérateur logique
+        de dimension tradParams.LOG_OP_DIM, à partir de celles du centre
+        de son rectangle exprimées en inch.
+        Cette méthode renvoie un tuple (xsbgn, ysbgn)"""
+        dsbgn = tradParams.LOG_OP_DIM
+        xsbgn = xdot * self.resolution - (dsbgn/2.0) + self.max_width * 0.025
+        ysbgn = 1.025 * self.max_height - ydot * self.resolution - (dsbgn/2.0)
+        return (xsbgn, ysbgn)
 
     def set_glyph_position(self, id_g, xdot, ydot, wdot, hdot):
         """Calcul des coordonnées x et y du glyph d'identifiant id_g
         à partir des cordonnées xdot et ydot fournies par DOT."""
         gly = self.dic_id_glyph[id_g]
-        (x_gly, y_gly, w_gly, h_gly) = self.change_origin_glyph(xdot,
-        ydot, wdot, hdot)
+        if gly.get_class() in self.dic_log_op.keys():
+            (x_gly, y_gly) = self.change_origin_logop(xdot, ydot)
+            w_gly = tradParams.LOG_OP_DIM
+            h_gly = tradParams.LOG_OP_DIM
+        else:
+            (x_gly, y_gly, w_gly, h_gly) = self.change_origin_glyph(xdot,
+            ydot, wdot, hdot)
         box = libsbgn.bbox(x=x_gly, y=y_gly, w=w_gly,
         h=h_gly)
         gly.set_bbox(box)
