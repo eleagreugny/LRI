@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
 
+from libsbgnpy.libsbgnTypes import GlyphClass, ArcClass
+
 class tradParams :
 
     #résolution de l'image : pixels / inch 
-    RESOLUTION = 150
+    RESOLUTION = 120
 
     #hauteur de la box d'une unité d'information d'un compartment
     HEIGHT_COMPARTMENT_UOI = 20

@@ -73,10 +73,6 @@ class TraductionAF:
         'uoi' : self.create_unitOfInformation,
         'biologicalActivity' : self.create_glyph}
 
-        #dictionnaire des opérateurs logiques et labels associés
-        self.dic_log_op = {GlyphClass.AND : 'AND', GlyphClass.OR : 'OR',
-        GlyphClass.NOT : 'NOT', GlyphClass.DELAY : 'T'}
-
         #Graphe en langage DOT
         self.dot_graph = Digraph('G', filename='position_graph_sbgn.gv',
         format='plain', encoding='utf8')
