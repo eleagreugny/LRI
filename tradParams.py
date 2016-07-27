@@ -2,7 +2,7 @@
 
 from libsbgnpy.libsbgnTypes import GlyphClass, ArcClass
 
-class tradParams :
+class ParamsLogToAF :
 
     #résolution de l'image : pixels / inch 
     RESOLUTION = 120
