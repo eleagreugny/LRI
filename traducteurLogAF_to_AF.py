@@ -3,12 +3,12 @@
 
 #from __future__ import print_function
 #from __future__ import unicode_literals
-import re
 import codecs
 from graphviz import Digraph
+import re
+import sys
 
 import libsbgnpy.libsbgn as libsbgn  # import the bindings
-from libsbgnpy.libsbgnUtils import print_bbox # some additional helpers
 from libsbgnpy.libsbgnTypes import Language, GlyphClass, ArcClass
 from tradParams import tradParams
 
@@ -29,7 +29,7 @@ class TraductionAF:
         self.map.set_language(Language.AF)
         self.sbgn.set_map(self.map)
         self.f_out = fichier_sortie
-        #résolution de l'image : pixels / inch 
+        #résolution de l'image : pixels / inch
         self.resolution = tradParams.RESOLUTION
 
         #compteur de glyphs
@@ -76,7 +76,6 @@ class TraductionAF:
         #Graphe en langage DOT
         self.dot_graph = Digraph('G', filename='position_graph_sbgn.gv',
         format='plain', encoding='utf8')
-        
 
         #hauteur et largeur du graphe en pixels : mise à jour au moment
         #de la lecture du fichier .gv.plain
@@ -206,9 +205,11 @@ class TraductionAF:
                             id_source = id_source[:id_source.find('.')]
                         source = self.dic_id_glyph[id_source]
                         if source.get_compartmentRef():
-                            comp = self.dic_id_glyph[source.get_compartmentRef()]
+                            comp = self.dic_id_glyph[
+                            source.get_compartmentRef()]
                             self.dic_comp[comp].append(gly)
-                            del self.single_glyph[self.single_glyph.index(gly)]
+                            del self.single_glyph[
+                            self.single_glyph.index(gly)]
                             break
 
     def LogAF_to_AF(self):
@@ -273,9 +274,8 @@ class TraductionAF:
         for comp in self.dic_comp.keys():
             cluster_name = 'cluster_' + str(comp_index)
             c = Digraph(cluster_name, encoding='utf8')
-            print(c.encoding)
             for glyph in self.dic_comp[comp]:
-                if (glyph.get_class() in tradParams.DIC_LOG_OP.keys()):
+                if glyph.get_class() in tradParams.DIC_LOG_OP.keys():
                     c.node(glyph.get_id(),
                     label=tradParams.DIC_LOG_OP[glyph.get_class()],
                     shape='circle')
@@ -289,9 +289,10 @@ class TraductionAF:
             comp_index += 1
         #création des node hors compartment
         for glyph in self.single_glyph:
-            if (glyph.get_class() in tradParams.DIC_LOG_OP.keys()):
+            if glyph.get_class() in tradParams.DIC_LOG_OP.keys():
                 self.dot_graph.node(glyph.get_id(),
-                label=tradParams.DIC_LOG_OP[glyph.get_class()], shape='circle')
+                label=tradParams.DIC_LOG_OP[glyph.get_class()],
+                shape='circle')
             else:
                 if glyph.get_label():
                     self.dot_graph.node(glyph.get_id(),
@@ -436,7 +437,8 @@ class TraductionAF:
             if couple[0] == 's':
                 possible_target = couple[1].get_target()
                 if '.' in possible_target:
-                    possible_target = possible_target[:possible_target.find('.')]
+                    possible_target = possible_target[
+                    :possible_target.find('.')]
                 if possible_target == id_target:
                     arc = couple[1]
                     break
@@ -452,7 +454,7 @@ class TraductionAF:
             #arc.set_start(trace[0])
             arc.set_start(trace[1])
             #arc.set_next(trace[1:len(trace)-1])
-        else :
+        else:
             arc.set_start(trace[0])
         arc.set_end(trace[-1])
         #implémentation des coordonnées des éventuels ports
@@ -476,9 +478,9 @@ class TraductionAF:
                 break
 
     def read_dot(self):
-        """Lecture du fichier .gv.plain et récupération des 
+        """Lecture du fichier .gv.plain et récupération des
         positions des glyphs et des arcs."""
-        dot = codecs.open('position_graph.gv.plain','r', 'utf8')
+        dot = codecs.open('position_graph.gv.plain', 'r', 'utf8')
         lines = dot.readlines()
         for i in range(len(lines)):
             lines[i] = lines[i].split()
@@ -524,7 +526,13 @@ f = open('position_graph.gv.plain', 'r')
 print(f.readline())
 for line in f.readlines():
     print (line)
-"""
 test = TraductionAF('erk_af_pruned.asp', 'erk_af_pruned.sbgn')
 test.translation()
+"""
+
+def main(argv):
+    trad = TraductionAF(sys.argv[1], sys.argv[2])
+    trad.translation()
+
+    
 

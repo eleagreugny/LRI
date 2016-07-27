@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 
 import libsbgnpy.libsbgn as libsbgn  # import the bindings
-from libsbgnpy.libsbgnUtils import print_bbox # some additional helpers
 from libsbgnpy.libsbgnTypes import Language, GlyphClass, ArcClass
 
 class TraductionAFLog:
