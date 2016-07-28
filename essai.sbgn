@@ -54,9 +54,8 @@
             <label text="Beta BBB"/>
             <bbox y="510.0" x="151.0" h="60.0" w="108.0"/>
             <glyph id="glyph1a" class="unit of information">
-                <label text="aaa"/>
                 <entity name="nucleic acid feature"/>
-                <bbox y="502.0" x="161.5" h="16.0" w="33.0"/>
+                <bbox y="502.0" x="163.0" h="16.0" w="30.0"/>
             </glyph>
         </glyph>
         <glyph compartmentRef="glyph11" id="glyph4" class="phenotype">

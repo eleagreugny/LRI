@@ -71,7 +71,7 @@ class TraductionAFLog:
 				#traduction des labels en predicats
 				try:
 					label = g.get_label().get_text()
-				except:
+				except AttributeError:
 					label = ""
 				self.tradlog.write('label('+self.dic_id[g.get_id()]
 				+',"'+label+'")\n')
@@ -82,7 +82,7 @@ class TraductionAFLog:
 						ui = g.get_glyph()[0]
 						try:
 							ui_lab = ui.get_label().get_text()
-						except:
+						except AttributeError:
 							ui_lab = ""
 						entity = ui.get_entity().get_name()
 						if entity == 'nucleic acid feature':
@@ -102,7 +102,7 @@ class TraductionAFLog:
 							else:
 								pre = 'void'
 								lab = ui_lab
-						except:
+						except AttributeError:
 							pre = 'void'
 							lab = ""
 						self.tradlog.write('uoi(' + self.dic_id[g.get_id()]
@@ -145,7 +145,7 @@ class TraductionAFLog:
 		et qu'il existe un même glyph dans un autre compartiment"""
 		try:
 			label = (g.get_label().get_text()).lower().replace(" ", "_")
-		except:
+		except AttributeError:
 			self.nb_asl += 1
 			label = 'a'+str(self.nb_asl)
 
@@ -153,7 +153,7 @@ class TraductionAFLog:
 			ui = g.get_glyph()[0]
 			try:
 				aux = (ui.get_label().get_text()).lower()
-			except:
+			except AttributeError:
 				aux = 'void'
 			typeaux = ParamsAFtoLog.DIC_UI[ui.get_entity().get_name()]
 			name = label + '_' + aux + '_' + typeaux
@@ -172,7 +172,7 @@ class TraductionAFLog:
 	def rename_comp(self, g):
 		"""Associe une constante au glyphe g de type compartment"""
 		name = g.get_glyph()[0].get_label().get_text().lower().replace(" ", "_")
-		self.dic_id[g.get_id()] = name 
+		self.dic_id[g.get_id()] = name
 
 	def rename_glyph(self):
 		"""Appelle les differentes methodes rename associees 

@@ -416,7 +416,7 @@ class TraductionAF:
             w_uoi = (ParamsLogToAF.WIDTH_EMPTY_UOI +
             ParamsLogToAF.WIDTH_MAX_LETTER *
             len(gly.get_glyph()[0].get_label().get_text()))
-        except:
+        except AttributeError:
             w_uoi = ParamsLogToAF.WIDTH_EMPTY_UOI
 
         x_gly = gly.get_bbox().get_x()
