@@ -11,7 +11,7 @@ import sys
 
 import libsbgnpy.libsbgn as libsbgn  # import the bindings
 from libsbgnpy.libsbgnTypes import Language, GlyphClass, ArcClass
-from tradParams import ParamsLogToAF as params
+from tradParams import ParamsLogToAF
 
 class TraductionAF:
     """
@@ -31,7 +31,7 @@ class TraductionAF:
         self.sbgn.set_map(self.map)
         self.f_out = fichier_sortie
         #résolution de l'image : pixels / inch
-        self.resolution = params.RESOLUTION
+        self.resolution = ParamsLogToAF.RESOLUTION
 
         #compteur de glyphs
         self.nb_glyph = 0
@@ -198,7 +198,7 @@ class TraductionAF:
         compartment d'un de leur input. Si aucun de leur input n'est
         associé à un compartment, le glyph reste sans compartment."""
         for gly in self.single_glyph:
-            if gly.get_class() in params.DIC_LOG_OP.keys():
+            if gly.get_class() in ParamsLogToAF.DIC_LOG_OP.keys():
                 for couple in self.dic_glyph_arc[gly]:
                     if couple[0] == 't':
                         id_source = couple[1].get_source()
@@ -224,7 +224,7 @@ class TraductionAF:
             if len(line) == 3:
                 #predicats du type : predicat(a)
                 const = line[1]
-                cls = params.DIC_GLYPH_TYPE[predicate]
+                cls = ParamsLogToAF.DIC_GLYPH_TYPE[predicate]
                 params = [const, cls]
                 func = self.dic_func[predicate]
                 func(*params)
@@ -234,10 +234,10 @@ class TraductionAF:
             #second parcours pour les autres prédicats
             line = re.split('[(,)]', line)
             predicate = line[0]
-            if predicate in params.DIC_ARC_TYPE.keys():
+            if predicate in ParamsLogToAF.DIC_ARC_TYPE.keys():
                 const_s = line[1]
                 const_t = line[2]
-                cls_a = params.DIC_ARC_TYPE[predicate]
+                cls_a = ParamsLogToAF.DIC_ARC_TYPE[predicate]
                 params = [const_s, const_t, cls_a]
                 func = self.dic_func[predicate]
                 func(*params)
@@ -255,7 +255,7 @@ class TraductionAF:
                     #(affectation des unités auxiliaires)
                     if predicate in self.dic_func.keys():
                         const_g = line[1]
-                        cls_ui = params.DIC_UI_TYPE[line[2].replace('"', '')]
+                        cls_ui = ParamsLogToAF.DIC_UI_TYPE[line[2].replace('"', '')]
                         label = line[3]
                         params = [const_g, cls_ui, label]
                         func = self.dic_func[predicate]
@@ -276,9 +276,9 @@ class TraductionAF:
             cluster_name = 'cluster_' + str(comp_index)
             c = Digraph(cluster_name, encoding='utf8')
             for glyph in self.dic_comp[comp]:
-                if glyph.get_class() in params.DIC_LOG_OP.keys():
+                if glyph.get_class() in ParamsLogToAF.DIC_LOG_OP.keys():
                     c.node(glyph.get_id(),
-                    label=params.DIC_LOG_OP[glyph.get_class()],
+                    label=ParamsLogToAF.DIC_LOG_OP[glyph.get_class()],
                     shape='circle')
                 else:
                     if glyph.get_label():
@@ -290,9 +290,9 @@ class TraductionAF:
             comp_index += 1
         #création des node hors compartment
         for glyph in self.single_glyph:
-            if glyph.get_class() in params.DIC_LOG_OP.keys():
+            if glyph.get_class() in ParamsLogToAF.DIC_LOG_OP.keys():
                 self.dot_graph.node(glyph.get_id(),
-                label=params.DIC_LOG_OP[glyph.get_class()],
+                label=ParamsLogToAF.DIC_LOG_OP[glyph.get_class()],
                 shape='circle')
             else:
                 if glyph.get_label():
@@ -353,10 +353,10 @@ class TraductionAF:
         par son soin supérieur gauche.
         Cette méthode permet donc de calculer les coordonnées du coin
         supérieur gauche d'un glyph de type opérateur logique
-        de dimension params.LOG_OP_DIM, à partir de celles du centre
+        de dimension ParamsLogToAF.LOG_OP_DIM, à partir de celles du centre
         de son rectangle exprimées en inch.
         Cette méthode renvoie un tuple (xsbgn, ysbgn)"""
-        dsbgn = params.LOG_OP_DIM
+        dsbgn = ParamsLogToAF.LOG_OP_DIM
         xsbgn = xdot * self.resolution - (dsbgn/2.0) + self.max_width * 0.025
         ysbgn = 1.025 * self.max_height - ydot * self.resolution - (dsbgn/2.0)
         return (xsbgn, ysbgn)
@@ -365,10 +365,10 @@ class TraductionAF:
         """Calcul des coordonnées x et y du glyph d'identifiant id_g
         à partir des cordonnées xdot et ydot fournies par DOT."""
         gly = self.dic_id_glyph[id_g]
-        if gly.get_class() in params.DIC_LOG_OP.keys():
+        if gly.get_class() in ParamsLogToAF.DIC_LOG_OP.keys():
             (x_gly, y_gly) = self.change_origin_logop(xdot, ydot)
-            w_gly = params.LOG_OP_DIM
-            h_gly = params.LOG_OP_DIM
+            w_gly = ParamsLogToAF.LOG_OP_DIM
+            h_gly = ParamsLogToAF.LOG_OP_DIM
         else:
             (x_gly, y_gly, w_gly, h_gly) = self.change_origin_glyph(xdot,
             ydot, wdot, hdot)
@@ -408,16 +408,16 @@ class TraductionAF:
         glyph gly. Les coordonnées de gly doivent avoir été calculées
         avant."""
         if gly.get_class() == GlyphClass.COMPARTMENT:
-            h_uoi = params.HEIGHT_COMPARTMENT_UOI
+            h_uoi = ParamsLogToAF.HEIGHT_COMPARTMENT_UOI
         else:
-            h_uoi = params.HEIGHT_GLYPH_UOI
+            h_uoi = ParamsLogToAF.HEIGHT_GLYPH_UOI
 
         try:
-            w_uoi = (params.WIDTH_EMPTY_UOI +
-            params.WIDTH_MAX_LETTER *
+            w_uoi = (ParamsLogToAF.WIDTH_EMPTY_UOI +
+            ParamsLogToAF.WIDTH_MAX_LETTER *
             len(gly.get_glyph()[0].get_label().get_text()))
         except:
-            w_uoi = params.WIDTH_EMPTY_UOI
+            w_uoi = ParamsLogToAF.WIDTH_EMPTY_UOI
 
         x_gly = gly.get_bbox().get_x()
         y_gly = gly.get_bbox().get_y()

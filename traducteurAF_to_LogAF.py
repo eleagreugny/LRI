@@ -4,6 +4,8 @@
 import libsbgnpy.libsbgn as libsbgn  # import the bindings
 from libsbgnpy.libsbgnTypes import Language, GlyphClass, ArcClass
 
+from tradParams import ParamsAFtoLog
+
 class TraductionAFLog:
 	"""
 	Cette classe permet de traduire un graphe SBGN-AF stocké
@@ -22,25 +24,8 @@ class TraductionAFLog:
 		#fichier texte qui contiendra la traduction en predicats
 		self.tradlog = open("tradLog.txt", 'w')
 
-		# dictionnaire de traduction des glyphs
-		self.dic_glyph = {GlyphClass.BIOLOGICAL_ACTIVITY : 'ba(',
-		GlyphClass.PERTURBATION : 'perturbation(',
-		GlyphClass.PHENOTYPE : 'phenotype(', GlyphClass.AND : 'and(',
-		GlyphClass.OR : 'or(', GlyphClass.NOT: 'not(',
-		GlyphClass.DELAY : 'delay(',
-		GlyphClass.COMPARTMENT : 'compartment('}
-		#dictionnaire de traduction des arcs
-		self.dic_arc = {ArcClass.LOGIC_ARC : "input(",
-		ArcClass.POSITIVE_INFLUENCE : "stimulates(",
-		ArcClass.NEGATIVE_INFLUENCE : "inhibits(",
-		ArcClass.UNKNOWN_INFLUENCE : "unknownInfluences(",
-		ArcClass.NECESSARY_STIMULATION : "necessarilyStimulates("}
-
 		#compteur des operateurs logiques
 		self.nb_op = 0
-		#liste des operateurs logiques
-		self.lop = [GlyphClass.AND, GlyphClass.OR, GlyphClass.NOT,
-		GlyphClass.DELAY]
 
 		#dictionnaire des nouveaux id des glyphs
 		#(les anciens  id constituent les cles)
@@ -72,8 +57,8 @@ class TraductionAFLog:
 			cls = g.get_class()
 
 			#traduction des glyphs en predicats
-			if cls in self.dic_glyph.keys():
-				self.tradlog.write(self.dic_glyph[cls]
+			if cls in ParamsAFtoLog.DIC_GLYPH.keys():
+				self.tradlog.write(ParamsAFtoLog.DIC_GLYPH[cls]
 				+self.dic_id[g.get_id()]+")\n")
 
 			#traduction des localisations
@@ -82,7 +67,7 @@ class TraductionAFLog:
 				+ self.dic_id[g.get_id()] + ','
 				+ self.dic_id[g.get_compartmentRef()] + ')\n')
 
-			if cls not in self.lop:
+			if cls not in ParamsAFtoLog.LOP:
 				#traduction des labels en predicats
 				try:
 					label = g.get_label().get_text()
@@ -128,7 +113,7 @@ class TraductionAFLog:
 		en fonction du type d'arc"""
 		for a in self.arcs:
 			cls = a.get_class()
-			if cls in self.dic_arc.keys():
+			if cls in ParamsAFtoLog.DIC_ARC.keys():
 				source = a.get_source()
 				target = a.get_target()
 				if '.' in source:
@@ -137,8 +122,8 @@ class TraductionAFLog:
 				if '.' in target:
 					pos_t = target.find('.')
 					target = target[:pos_t]
-				self.tradlog.write(self.dic_arc[cls]+self.dic_id[source]
-				+","+self.dic_id[target]+")\n")
+				self.tradlog.write(ParamsAFtoLog.DIC_ARC[cls] +
+                self.dic_id[source] + "," + self.dic_id[target] + ")\n")
 
 
 	def rename_op(self, g):
@@ -154,7 +139,7 @@ class TraductionAFLog:
 		label_aux_typeaux_comp
 		label designe le label du glyphe g,
 		aux le label de l'unite auxiliaire,
-		typeaux le type de l'unite auxiliaire (voir self.dic_ui),
+		typeaux le type de l'unite auxiliaire (voir ParamsAFtoLog.DIC_UI),
 		comp le compartiment dans lequel se trouve le glyphe
 		si il y a plusieurs compartiments dans le graphe
 		et qu'il existe un même glyph dans un autre compartiment"""
@@ -170,7 +155,7 @@ class TraductionAFLog:
 				aux = (ui.get_label().get_text()).lower()
 			except:
 				aux = 'void'
-			typeaux = self.dic_ui[ui.get_entity().get_name()]
+			typeaux = ParamsAFtoLog.DIC_UI[ui.get_entity().get_name()]
 			name = label + '_' + aux + '_' + typeaux
 		else:
 			name = label
@@ -194,7 +179,7 @@ class TraductionAFLog:
 		aux differents types de glyphes"""
 		for g in self.glyphs:
 			cls = g.get_class()
-			if cls in self.lop :
+			if cls in ParamsAFtoLog.LOP :
 				self.rename_op(g)
 			else :
 				if cls != GlyphClass.COMPARTMENT :

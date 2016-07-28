@@ -3,6 +3,7 @@
 from libsbgnpy.libsbgnTypes import GlyphClass, ArcClass
 
 class ParamsLogToAF :
+    """Paramètres utilisés dans TraductionAF."""
 
     #résolution de l'image : pixels / inch 
     RESOLUTION = 120
@@ -46,4 +47,33 @@ class ParamsLogToAF :
     #dictionnaire des opérateurs logiques et labels associés
     DIC_LOG_OP = {GlyphClass.AND : 'AND', GlyphClass.OR : 'OR',
     GlyphClass.NOT : 'NOT', GlyphClass.DELAY : 'T'}
+
+class ParamsAFtoLog:
+    """Paramètres utilisés dans TraductionAFLog."""
+
+    # dictionnaire de traduction des glyphs
+    DIC_GLYPH = {GlyphClass.BIOLOGICAL_ACTIVITY : 'ba(',
+    GlyphClass.PERTURBATION : 'perturbation(',
+    GlyphClass.PHENOTYPE : 'phenotype(', GlyphClass.AND : 'and(',
+    GlyphClass.OR : 'or(', GlyphClass.NOT: 'not(',
+    GlyphClass.DELAY : 'delay(',
+    GlyphClass.COMPARTMENT : 'compartment('}
+
+    #dictionnaire de traduction des arcs
+    DIC_ARC = {ArcClass.LOGIC_ARC : "input(",
+    ArcClass.POSITIVE_INFLUENCE : "stimulates(",
+    ArcClass.NEGATIVE_INFLUENCE : "inhibits(",
+    ArcClass.UNKNOWN_INFLUENCE : "unknownInfluences(",
+    ArcClass.NECESSARY_STIMULATION : "necessarilyStimulates("}
+
+    #liste des operateurs logiques
+    LOP = [GlyphClass.AND, GlyphClass.OR, GlyphClass.NOT,
+    GlyphClass.DELAY]
+
+    #dictionnaire de correspondance pour les units of information
+    DIC_UI = {'unspecified entity' : 'u',
+    'simple chemical' : 'sc', 'macromolecule' : 'm',
+    'nucleic acid feature' : 'naf', 'complex' : 'c',
+    'perturbation' : 'p'}
+
 
