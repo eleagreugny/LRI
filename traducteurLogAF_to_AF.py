@@ -11,7 +11,7 @@ import sys
 
 import libsbgnpy.libsbgn as libsbgn  # import the bindings
 from libsbgnpy.libsbgnTypes import Language, GlyphClass, ArcClass
-from tradParams import ParamsLogToAF
+from tradParams import ParamsLogToAF, DuplicateError
 
 class TraductionAF:
     """
@@ -39,7 +39,7 @@ class TraductionAF:
         self.nb_arc = 0
 
         #dictionnaire qui fait correspondre les constantes logiques
-        #associées aux glyphes (clé) avec leurs id.
+        #associées aux glyphes (clé) avec les glyphs eux-mêmes.
         self.dic_const_glyph = {}
 
         #dictionnaire qui relie les glyphs (clés) aux arcs auxquels ils
@@ -92,11 +92,16 @@ class TraductionAF:
         gly = libsbgn.glyph(class_=cls, id='glyph' +
         str(self.nb_glyph), bbox=box)
         self.map.add_glyph(gly)
-        self.dic_const_glyph[const] = gly
-        self.dic_glyph_arc[gly] = []
-        self.dic_id_glyph[gly.get_id()] = gly
-        if cls == GlyphClass.COMPARTMENT:
-            self.dic_comp[gly] = []
+        if const in self.dic_const_glyph.keys():
+            raise DuplicateError("""The same logical constant may be
+            associated with several glyphs or one glyph may be
+            declared several times.""")
+        else:
+            self.dic_const_glyph[const] = gly
+            self.dic_glyph_arc[gly] = []
+            self.dic_id_glyph[gly.get_id()] = gly
+            if cls == GlyphClass.COMPARTMENT:
+                self.dic_comp[gly] = []
 
     def create_arc(self, const_s, const_t, cls_arc):
         """Crée un objet arc de type cls_a.
@@ -508,6 +513,7 @@ class TraductionAF:
             if (line[0] == 'node' and
             (self.dic_id_glyph[line[1]] in self.dic_comp.keys())):
                 self.set_comp_position(line[1])
+        dot.close()
 
     def output_f(self):
         """Création du fichier de sortie .sbgn"""

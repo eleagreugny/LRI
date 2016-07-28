@@ -76,4 +76,12 @@ class ParamsAFtoLog:
     'nucleic acid feature' : 'naf', 'complex' : 'c',
     'perturbation' : 'p'}
 
+class TraductionError(Exception):
+    
+    def __init__(self, msg):
+        super(TraductionError, self).__init__(msg)
 
+class DuplicateError(TraductionError):
+    
+    def __init__(self, msg):
+        super(DuplicateError, self).__init__(msg)
