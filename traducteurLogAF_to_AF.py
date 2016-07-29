@@ -575,17 +575,5 @@ class TraductionAF:
         en graph SBGN-AF."""
         self.LogAF_to_AF()
         self.output_f()
-
-#test
-"""
-trad = TraductionAF('tradLog.txt', 'tradAF.sbgn')
-trad.translation()
-f = open('position_graph.gv.plain', 'r')
-print(f.readline())
-for line in f.readlines():
-    print (line)
-test = TraductionAF('erk_af_pruned.asp', 'erk_af_pruned.sbgn')
-test.translation()
-"""
     
 
