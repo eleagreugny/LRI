@@ -11,7 +11,7 @@ import sys
 
 import libsbgnpy.libsbgn as libsbgn  # import the bindings
 from libsbgnpy.libsbgnTypes import Language, GlyphClass, ArcClass
-from tradParams import ParamsLogToAF, DuplicateError
+from tradParams import *
 
 class TraductionAF:
     """
@@ -93,9 +93,10 @@ class TraductionAF:
         str(self.nb_glyph), bbox=box)
         self.map.add_glyph(gly)
         if const in self.dic_const_glyph.keys():
-            raise DuplicateError("""The same logical constant may be
-            associated with several glyphs or one glyph may be
-            declared several times.""")
+            text = """The same logical constant '""" + const + """' may be
+            associated with several glyphs or the glyph '""" + const + """'
+            may be declared several times."""
+            raise DuplicateError(text)
         else:
             self.dic_const_glyph[const] = gly
             self.dic_glyph_arc[gly] = []
@@ -111,8 +112,18 @@ class TraductionAF:
         L'id sera arcN où N est le numéro de l'arc, incrémenté
         à chaque création d'arc."""
         self.nb_arc += 1
-        sour = self.port_management(self.dic_const_glyph[const_s])
-        targ = self.port_management(self.dic_const_glyph[const_t])
+        try:
+            sour = self.port_management(self.dic_const_glyph[const_s])
+        except KeyError:
+            msg = """The source glyph '""" + const_s + """' used in this
+            arc has not been declared."""
+            raise MissingGlyphError(msg)
+        try:
+            targ = self.port_management(self.dic_const_glyph[const_t])
+        except KeyError:
+            msg = """The target glyph '""" + const_t + """' used in this
+            arc has not been declared."""
+            raise MissingGlyphError(msg)
         arc = libsbgn.arc(class_=cls_arc, source=sour, target=targ,
         id='arc' + str(self.nb_arc))
         self.map.add_arc(arc)
@@ -155,13 +166,28 @@ class TraductionAF:
         lab = lab.encode('utf8')
         lab = lab.replace('"', '')
         label = libsbgn.label(text=lab.decode('utf8'))
-        self.dic_const_glyph[const_g].set_label(label)
+        try:
+            self.dic_const_glyph[const_g].set_label(label)
+        except KeyError:
+            msg = """The glyph '""" + const_g + """' has not been
+            declared."""
+            raise MissingGlyphError(msg)
 
     def create_localisation(self, const_g, const_c):
         """Affecte le glyphe de constante logique const_g
         au compartiment de constante logique const_c"""
-        gly = self.dic_const_glyph[const_g]
-        comp = self.dic_const_glyph[const_c]
+        try:
+            gly = self.dic_const_glyph[const_g]
+        except KeyError:
+            msg = """The glyph '""" + const_g + """' has not been
+            declared."""
+            raise MissingGlyphError(msg)
+        try:
+            comp = self.dic_const_glyph[const_c]
+        except KeyError:
+            msg = """The compartment '""" + const_c + """' has not been
+            declared."""
+            raise MissingGlyphError(msg)
         gly.set_compartmentRef(comp.get_id())
         self.dic_comp[comp].append(gly)
         del self.single_glyph[self.single_glyph.index(gly)]
@@ -175,10 +201,13 @@ class TraductionAF:
         L'id de l'unité d'information est constitué de celui du glyphe
         auquel elle appartient, auquel on ajoute une lettre."""
         box = libsbgn.bbox()
-
-        uoi = libsbgn.glyph(class_=GlyphClass.UNIT_OF_INFORMATION,
-        id=str(self.dic_const_glyph[const_g].get_id())+'a', bbox=box)
-
+        try:
+            uoi = libsbgn.glyph(class_=GlyphClass.UNIT_OF_INFORMATION,
+            id=str(self.dic_const_glyph[const_g].get_id())+'a', bbox=box)
+        except KeyError:
+            msg = """The glyph '""" + const_g + """' has not been
+            declared."""
+            raise MissingGlyphError(msg)
         if self.dic_const_glyph[const_g].get_class() != GlyphClass.COMPARTMENT:
             lab = label_ui.encode('utf8')
             lab = label_ui.replace('"', '')

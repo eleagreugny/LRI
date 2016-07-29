@@ -85,3 +85,8 @@ class DuplicateError(TraductionError):
     
     def __init__(self, msg):
         super(DuplicateError, self).__init__(msg)
+
+class MissingGlyphError(TraductionError):
+
+    def __init__(self, msg):
+        super(MissingGlyphError, self).__init__(msg)
