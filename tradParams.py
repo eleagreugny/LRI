@@ -95,3 +95,8 @@ class GlyphClassError(TraductionError):
 
     def __init__(self, msg):
         super(GlyphClassError, self).__init__(msg)
+
+class PredicateError(TraductionError):
+
+    def __init__(self, msg):
+        super(PredicateError, self).__init__(msg)

@@ -262,9 +262,9 @@ class TraductionAF:
                     cls = ParamsLogToAF.DIC_GLYPH_TYPE[predicate]
                 except KeyError:
                     msg = """'""" + predicate + """' doesn't match
-                    any type of glyph. The allowed types are : ba/
-                    biologicalActivity, perturbation, phenotype,
-                    and, or, not, delay, compartment."""
+                    any glyph type. The allowed types are : ba/biologicalActivity,
+                    perturbation, phenotype, and, or, not, delay,
+                    compartment."""
                     raise GlyphClassError(msg)
                 params = [const, cls]
                 func = self.dic_func[predicate]
@@ -273,34 +273,49 @@ class TraductionAF:
 
         for line in data:
             #second parcours pour les autres prédicats
-            line = re.split('[(,)]', line)
-            predicate = line[0]
+            split_line = re.split('[(,)]', line)
+            predicate = split_line[0]
             if predicate in ParamsLogToAF.DIC_ARC_TYPE.keys():
-                const_s = line[1]
-                const_t = line[2]
+                const_s = split_line[1]
+                const_t = split_line[2]
                 cls_a = ParamsLogToAF.DIC_ARC_TYPE[predicate]
                 params = [const_s, const_t, cls_a]
                 func = self.dic_func[predicate]
                 func(*params)
             else:
-                if len(line) == 4:
+                if len(split_line) == 4:
                     #predicats du type : predicat(a,b)
                     if predicate in self.dic_func.keys():
-                        const = line[1]
-                        arg = line[2]
+                        const = split_line[1]
+                        arg = split_line[2]
                         params = [const, arg]
                         func = self.dic_func[predicate]
                         func(*params)
-                if len(line) == 5:
+                    else:
+                        msg = """This line doesn't seem
+                        to match any logical predicate.\n""" + line
+                        raise PredicateError(msg)
+                elif len(split_line) == 5:
                     #predicats du type : predicat(a,b,c)
                     #(affectation des unités auxiliaires)
                     if predicate in self.dic_func.keys():
-                        const_g = line[1]
-                        cls_ui = ParamsLogToAF.DIC_UI_TYPE[line[2].replace('"', '')]
-                        label = line[3]
+                        const_g = split_line[1]
+                        cls_ui = ParamsLogToAF.DIC_UI_TYPE[
+                        split_line[2].replace('"', '')]
+                        label = split_line[3]
                         params = [const_g, cls_ui, label]
                         func = self.dic_func[predicate]
                         func(*params)
+                    else:
+                        msg = """This line doesn't seem
+                        to match any logical predicate.\n""" + line
+                        raise PredicateError(msg)
+                elif len(split_line) != 0 and (split_line[0] not in
+                ParamsLogToAF.DIC_GLYPH_TYPE.keys()):
+                    msg = """This line doesn't seem
+                    to match any logical predicate.\n""" + line
+                    raise PredicateError(msg)
+
         self.logic_nodes_localisation()
         self.create_dot_graph()
         self.dot_graph.render('position_graph.gv', view=False)
