@@ -1,5 +1,9 @@
 digraph G {
 	subgraph cluster_0 {
+		glyph13 [label=Kinase]
+		glyph14 [label=ACE]
+	}
+	subgraph cluster_1 {
 		glyph5 [label=ERK]
 		glyph6 [label=acide]
 		glyph9 [label="Beta BBB"]
@@ -9,10 +13,6 @@ digraph G {
 		glyph18 [label="ajout calcium"]
 		glyph4 [label=NOT shape=circle]
 		glyph8 [label=AND shape=circle]
-	}
-	subgraph cluster_1 {
-		glyph13 [label=Kinase]
-		glyph14 [label=ACE]
 	}
 	subgraph cluster_2 {
 		glyph15 [label=blabla]

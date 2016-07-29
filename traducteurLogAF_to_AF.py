@@ -258,7 +258,14 @@ class TraductionAF:
             if len(line) == 3:
                 #predicats du type : predicat(a)
                 const = line[1]
-                cls = ParamsLogToAF.DIC_GLYPH_TYPE[predicate]
+                try:
+                    cls = ParamsLogToAF.DIC_GLYPH_TYPE[predicate]
+                except KeyError:
+                    msg = """'""" + predicate + """' doesn't match
+                    any type of glyph. The allowed types are : ba/
+                    biologicalActivity, perturbation, phenotype,
+                    and, or, not, delay, compartment."""
+                    raise GlyphClassError(msg)
                 params = [const, cls]
                 func = self.dic_func[predicate]
                 func(*params)

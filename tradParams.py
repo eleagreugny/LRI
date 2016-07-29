@@ -90,3 +90,8 @@ class MissingGlyphError(TraductionError):
 
     def __init__(self, msg):
         super(MissingGlyphError, self).__init__(msg)
+
+class GlyphClassError(TraductionError):
+
+    def __init__(self, msg):
+        super(GlyphClassError, self).__init__(msg)

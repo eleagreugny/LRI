@@ -1,4 +1,6 @@
 graph 1 10.111 7.5833
+node glyph13 4.7917 6.1111 0.97491 0.5 Kinase solid ellipse black lightgrey
+node glyph14 4.8333 5.1111 0.79437 0.5 ACE solid ellipse black lightgrey
 node glyph5 2.3333 3.9583 0.79437 0.5 ERK solid ellipse black lightgrey
 node glyph6 3.5694 5.1111 0.81243 0.5 acide solid ellipse black lightgrey
 node glyph9 1.8056 1.4722 1.2999 0.5 "Beta BBB" solid ellipse black lightgrey
@@ -8,8 +10,6 @@ node glyph12 0.72222 2.6389 1.011 0.5 bvogag solid ellipse black lightgrey
 node glyph18 2.0972 5.1111 1.6429 0.5 "ajout calcium" solid ellipse black lightgrey
 node glyph4 1.2917 3.9583 0.79437 0.79437 NOT solid circle black lightgrey
 node glyph8 1.8889 2.6389 0.83048 0.83048 AND solid circle black lightgrey
-node glyph13 4.7917 6.1111 0.97491 0.5 Kinase solid ellipse black lightgrey
-node glyph14 4.8333 5.1111 0.79437 0.5 ACE solid ellipse black lightgrey
 node glyph15 6.0556 6.1111 0.9027 0.5 blabla solid ellipse black lightgrey
 node glyph16 6.375 5.1111 1.5346 0.5 transcription solid ellipse black lightgrey
 node glyph17 6.0278 7.1111 0.81243 0.5 NaCl solid ellipse black lightgrey
@@ -17,6 +17,8 @@ node glyph1 7.7361 7.1111 0.75 0.5 "" solid ellipse black lightgrey
 node glyph2 8.7361 7.1111 0.75 0.5 "" solid ellipse black lightgrey
 node glyph3 9.7361 7.1111 0.75 0.5 "" solid ellipse black lightgrey
 node glyph7 4.5139 3.9583 0.63189 0.63189 OR solid circle black lightgrey
+edge glyph13 glyph14 4 4.802 5.8569 4.8066 5.7498 4.8121 5.621 4.8172 5.5016 solid black
+edge glyph13 glyph18 7 4.4021 5.9592 4.0472 5.8333 3.5088 5.6415 3.0417 5.4722 2.94 5.4354 2.8324 5.3961 2.7275 5.3576 solid black
 edge glyph5 glyph8 4 2.2518 3.7075 2.1998 3.5563 2.1303 3.3543 2.066 3.1676 solid black
 edge glyph6 glyph7 4 3.7471 4.8856 3.8816 4.7254 4.0692 4.5019 4.2252 4.3161 solid black
 edge glyph9 glyph10 4 1.6845 1.223 1.6262 1.1095 1.5549 0.97099 1.49 0.84478 solid black
@@ -26,8 +28,6 @@ edge glyph12 glyph10 7 0.7627 2.389 0.81339 2.1081 0.90827 1.6261 1.0278 1.2222 
 edge glyph18 glyph7 10 2.5968 4.9123 2.7403 4.8595 2.8971 4.8022 3.0417 4.75 3.5283 4.5743 3.7039 4.6412 4.1389 4.3611 4.1652 4.3442 4.1909 4.3251 4.2159 4.3047 solid black
 edge glyph4 glyph8 4 1.4549 3.5915 1.5184 3.454 1.5924 3.294 1.6611 3.1455 solid black
 edge glyph8 glyph9 4 1.8593 2.2203 1.8508 2.1047 1.8416 1.9792 1.8333 1.8652 solid black
-edge glyph13 glyph18 7 4.4021 5.9592 4.0472 5.8333 3.5088 5.6415 3.0417 5.4722 2.94 5.4354 2.8324 5.3961 2.7275 5.3576 solid black
-edge glyph13 glyph14 4 4.802 5.8569 4.8066 5.7498 4.8121 5.621 4.8172 5.5016 solid black
 edge glyph15 glyph14 4 5.8082 5.9005 5.6286 5.7576 5.3831 5.5623 5.1834 5.4035 solid black
 edge glyph15 glyph16 4 6.1329 5.8619 6.1688 5.7524 6.2125 5.6197 6.2527 5.4971 solid black
 edge glyph17 glyph18 7 5.658 7.006 5.2689 6.9029 4.644 6.7171 4.1389 6.4722 3.5329 6.1784 2.8941 5.7316 2.4958 5.4341 solid black
