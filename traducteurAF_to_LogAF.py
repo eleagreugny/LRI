@@ -16,13 +16,13 @@ class TraductionAFLog:
 	@date: 06/07/2016
 	"""
 
-	def __init__(self, fichier):
-		self.sbgn = libsbgn.parse(fichier)
+	def __init__(self, fichier_entree, fichier_sortie):
+		self.sbgn = libsbgn.parse(fichier_entree)
 		self.map = self.sbgn.get_map()
 		self.glyphs = self.map.get_glyph()
 		self.arcs = self.map.get_arc()
 		#fichier texte qui contiendra la traduction en predicats
-		self.tradlog = open("tradLog.txt", 'w')
+		self.tradlog = open(fichier_sortie, 'w')
 
 		#compteur des operateurs logiques
 		self.nb_op = 0
@@ -260,10 +260,3 @@ class TraductionAFLog:
 		self.glyphs_trad()
 		self.arcs_trad()
 		self.tradlog.close()
-
-
-
-#tests
-
-test = TraductionAFLog('essai.sbgn')
-test.traduire()
